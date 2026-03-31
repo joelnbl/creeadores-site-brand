@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Rocket, Users, ShieldCheck, CircleCheckBig, type LucideIcon } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
+import { analytics } from "@/lib/analytics"
 
 const iconMap: LucideIcon[] = [Rocket, Users, ShieldCheck, CircleCheckBig]
 
@@ -10,6 +11,41 @@ export function HowItWorks() {
   const [activeStep, setActiveStep] = useState(0)
   const { dictionary } = useLanguage()
   const t = dictionary.home.howItWorks
+
+  function trackStepSelection(stepIndex: number, interactionType: "step_click" | "previous" | "next") {
+    const step = t.steps[stepIndex]
+    analytics.track("how_it_works_step_selected", {
+      step_number: stepIndex + 1,
+      step_title: step.title,
+      interaction_type: interactionType,
+      location: "how_it_works",
+    })
+  }
+
+  function handleStepClick(stepIndex: number) {
+    setActiveStep(stepIndex)
+    trackStepSelection(stepIndex, "step_click")
+  }
+
+  function handlePreviousStep() {
+    const nextStep = Math.max(0, activeStep - 1)
+    if (nextStep === activeStep) {
+      return
+    }
+
+    setActiveStep(nextStep)
+    trackStepSelection(nextStep, "previous")
+  }
+
+  function handleNextStep() {
+    const nextStep = Math.min(t.steps.length - 1, activeStep + 1)
+    if (nextStep === activeStep) {
+      return
+    }
+
+    setActiveStep(nextStep)
+    trackStepSelection(nextStep, "next")
+  }
 
   return (
     <section className="py-16 sm:py-24 relative overflow-hidden">
@@ -67,7 +103,7 @@ export function HowItWorks() {
                 return (
                   <button
                     key={step.number}
-                    onClick={() => setActiveStep(i)}
+                    onClick={() => handleStepClick(i)}
                     className="flex flex-col items-center gap-3 cursor-pointer group"
                   >
                     <div
@@ -158,7 +194,7 @@ export function HowItWorks() {
 
             <div className="flex flex-col gap-3 flex-shrink-0">
               <button
-                onClick={() => setActiveStep((p) => Math.max(0, p - 1))}
+                onClick={handlePreviousStep}
                 disabled={activeStep === 0}
                 className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:border-[#0019DA] hover:text-[#0019DA] transition-colors disabled:opacity-30 disabled:hover:border-gray-200 disabled:hover:text-gray-400 cursor-pointer disabled:cursor-not-allowed"
               >
@@ -167,8 +203,8 @@ export function HowItWorks() {
                 </svg>
               </button>
               <button
-                onClick={() => setActiveStep((p) => Math.min(3, p + 1))}
-                disabled={activeStep === 3}
+                onClick={handleNextStep}
+                disabled={activeStep === t.steps.length - 1}
                 className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:border-[#0019DA] hover:text-[#0019DA] transition-colors disabled:opacity-30 disabled:hover:border-gray-200 disabled:hover:text-gray-400 cursor-pointer disabled:cursor-not-allowed"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

@@ -13,9 +13,11 @@ import {
   Settings,
   Package,
   ArrowRight,
+  Wrench,
   type LucideIcon,
 } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
+import { analytics } from "@/lib/analytics"
 import { appLink } from "@/lib/links"
 import ShinyText from "@/components/ui/shiny-text"
 import type { CampaignFeatureBlock, CampaignFloatingCard, SpotlightCard as SpotlightCardType } from "@/lib/i18n"
@@ -87,13 +89,21 @@ export function CampaignFeatures() {
             <ShinyText text={t.badge} color="#0019DA" shineColor="#93C5FD" speed={2} spread={90} />
           </span>
           <h2 style={{ fontSize: "clamp(22px, 3.5vw, 42px)", fontWeight: 700, lineHeight: 1.2, color: "#0A0A1A", whiteSpace: "pre-line", textTransform: "uppercase", letterSpacing: "-0.02em" }}>
-            {t.title}
+            <Settings className="inline-block" style={{ width: "1em", height: "1em", color: "#0019DA", position: "relative", top: "-4px" }} /> {t.title}
           </h2>
           <p className="mt-4 mx-auto max-w-2xl text-gray-500 text-[14px] sm:text-[16px]" style={{ lineHeight: 1.7 }}>
             {t.description}
           </p>
           <a
             href={appLink("/companies/new")}
+            onClick={() =>
+              analytics.trackMarketingCtaClicked({
+                ctaName: "campaign_features_register_free",
+                location: "campaign_features",
+                destination: appLink("/companies/new"),
+                targetUserType: "brand",
+              })
+            }
             className="inline-flex items-center gap-2 mt-6 bg-[#0019DA] text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full hover:bg-[#0014B0] transition-colors cursor-pointer"
             style={{ fontSize: "14px", fontWeight: 600 }}
           >

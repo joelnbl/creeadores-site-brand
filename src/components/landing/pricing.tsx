@@ -1,7 +1,8 @@
 "use client"
 
-import { Check, Rocket, TrendingUp, Building2, Users, Megaphone, Percent, ArrowRight, Phone, BadgeDollarSign, type LucideIcon } from "lucide-react"
+import { Check, Rocket, TrendingUp, Building2, Users, Megaphone, Percent, ArrowRight, Phone, BadgeDollarSign, Sparkles, type LucideIcon } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
+import { analytics } from "@/lib/analytics"
 import { appLink } from "@/lib/links"
 import ShinyText from "@/components/ui/shiny-text"
 import type { PricingPlan } from "@/lib/i18n"
@@ -45,7 +46,7 @@ export function Pricing() {
             <ShinyText text={t.badge} color="#0019DA" shineColor="#93C5FD" speed={2} spread={90} />
           </span>
           <h2 style={{ fontSize: "clamp(22px, 3.5vw, 42px)", fontWeight: 700, lineHeight: 1.2, color: "#0A0A1A", textTransform: "uppercase", letterSpacing: "-0.02em", whiteSpace: "pre-line" }}>
-            {t.title}
+            <TrendingUp className="inline-block align-middle" style={{ width: "0.85em", height: "0.85em", color: "#0019DA" }} /> {t.title}
           </h2>
           <p className="mt-4 mx-auto max-w-[520px] text-gray-500" style={{ fontSize: "16px", lineHeight: 1.7 }}>
             {t.description}
@@ -192,7 +193,16 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
       </ul>
 
       <a
-        href={plan.price ? appLink("/creator/register") : appLink("/companies/new")}
+        href={appLink("/companies/new")}
+        onClick={() =>
+          analytics.trackMarketingCtaClicked({
+            ctaName: plan.price ? "pricing_plan_signup" : "pricing_contact_sales",
+            location: "pricing",
+            destination: appLink("/companies/new"),
+            targetUserType: "brand",
+            planName: plan.name,
+          })
+        }
         className="w-full py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer hover:opacity-90"
         style={{
           backgroundColor: plan.popular ? "#FFFFFF" : plan.price ? "#0019DA" : "transparent",

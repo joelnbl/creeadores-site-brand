@@ -5,12 +5,14 @@ type LogoProps = {
   href?: string;
   className?: string;
   variant?: "blue" | "white";
+  onClick?: () => void;
 };
 
 export function Logo({
   href = "/",
   className,
   variant = "blue",
+  onClick,
 }: LogoProps) {
   const logoContent = (
     <svg
@@ -78,6 +80,7 @@ export function Logo({
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={cn(
         "flex items-center",
         variant === "white" ? "text-white" : "text-[#0019DA]",

@@ -141,3 +141,35 @@
 .nav-link-light::after {
   background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
 }
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes shine-loop {
+  0% { transform: translateX(-150%); }
+  20% { transform: translateX(150%); }
+  100% { transform: translateX(150%); }
+}
+
+.animate-shine-loop {
+  animation: shine-loop 3s ease-in-out infinite;
+  background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.5) 50%, transparent 80%);
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes hero-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-hero-marquee {
+  animation: hero-marquee 120s linear infinite;
+}
+
+.cta-shine {
+  background: linear-gradient(135deg, #0019DA 0%, #2B3FFF 100%);
+  box-shadow: 0 2px 8px rgba(0, 25, 218, 0.2);
+}

@@ -94,6 +94,7 @@ export type HomeDictionary = {
     links: { label: string; href: string }[];
     signIn: string;
     startFree: string;
+    startFreeMobile: string;
     signUpDropdown: {
       brand: { label: string; description: string };
       creator: { label: string; description: string };
@@ -123,12 +124,14 @@ export type HomeDictionary = {
     badge: string;
     title: string;
     description: string;
+    ctaButton?: string;
     blocks: CampaignFeatureBlock[];
   };
   pricing: {
     badge: string;
     title: string;
     description: string;
+    ctaButton?: string;
     plans: PricingPlan[];
   };
   landingFooter: {
@@ -151,6 +154,63 @@ export function resolveLocale(value: unknown): Locale {
   return isLocale(value) ? value : DEFAULT_LOCALE;
 }
 
+function matchLocaleCandidate(value: string): Locale | null {
+  const normalizedValue = value.trim().toLowerCase().replace(/_/g, "-");
+  if (!normalizedValue) return null;
+
+  const exactMatch = SUPPORTED_LOCALES.find((locale) => locale.toLowerCase() === normalizedValue);
+  if (exactMatch) return exactMatch;
+
+  const language = normalizedValue.split("-")[0];
+
+  if (language === "es") {
+    return normalizedValue === "es-mx" ? "es-MX" : "es-AR";
+  }
+
+  if (language === "en") {
+    return "en";
+  }
+
+  if (language === "pt") {
+    return "pt";
+  }
+
+  return null;
+}
+
+export function resolvePreferredLocale(options?: {
+  storedLocale?: unknown;
+  acceptLanguage?: string | null;
+}): Locale {
+  const storedLocale = options?.storedLocale;
+  if (isLocale(storedLocale)) {
+    return storedLocale;
+  }
+
+  const acceptLanguage = options?.acceptLanguage;
+  if (!acceptLanguage) {
+    return DEFAULT_LOCALE;
+  }
+
+  const candidates = acceptLanguage
+    .split(",")
+    .map((entry) => entry.split(";")[0]?.trim())
+    .filter(Boolean) as string[];
+
+  for (const candidate of candidates) {
+    const matchedLocale = matchLocaleCandidate(candidate);
+    if (matchedLocale) {
+      return matchedLocale;
+    }
+  }
+
+  return DEFAULT_LOCALE;
+}
+
+export function getLocaleLanguage(locale: Locale): string {
+  return locale.split("-")[0] ?? DEFAULT_LOCALE.split("-")[0];
+}
+
 const english: AppDictionary = {
   home: {
     hero: {
@@ -169,13 +229,13 @@ const english: AppDictionary = {
     },
     nav: {
       links: [
-        { label: "I'm a Creator", href: "/creator/register" },
         { label: "Campaigns", href: "#campaigns" },
         { label: "Features", href: "#features" },
         { label: "Pricing", href: "#pricing" },
       ],
       signIn: "Sign in",
       startFree: "Sign up for free",
+      startFreeMobile: "Sign up",
       signUpDropdown: {
         brand: { label: "I'm a brand", description: "Connect with creators" },
         creator: { label: "I'm a creator", description: "Monetize your content" },
@@ -239,7 +299,7 @@ const english: AppDictionary = {
     },
     campaignFeatures: {
       badge: "FEATURES",
-      title: "Launch and manage\nyour campaigns",
+      title: "Tools to manage\nyour campaigns",
       description: "Create your custom campaign and connect with the best creators — all from a single platform.",
       blocks: [
         {
@@ -291,7 +351,7 @@ const english: AppDictionary = {
       description: "We connect the best UGC creators with the most relevant brands in Latin America.",
       links: ["Creators", "Brands", "Pricing", "Success stories"],
       copyright: "\u00a9 2026 Creadores. All rights reserved.",
-      legal: ["Privacy", "Terms", "Cookies"],
+      legal: ["Privacy", "Terms"],
     },
   },
 };
@@ -314,13 +374,13 @@ const spanish: AppDictionary = {
     },
     nav: {
       links: [
-        { label: "Soy Creador", href: "/creator/register" },
         { label: "Campañas", href: "#campaigns" },
         { label: "Funcionalidades", href: "#features" },
         { label: "Precios", href: "#pricing" },
       ],
       signIn: "Iniciar sesion",
       startFree: "Registrate gratis",
+      startFreeMobile: "Registrate",
       signUpDropdown: {
         brand: { label: "Soy una marca", description: "Conecta con creadores" },
         creator: { label: "Soy creador", description: "Monetiza tu contenido" },
@@ -384,7 +444,7 @@ const spanish: AppDictionary = {
     },
     campaignFeatures: {
       badge: "FUNCIONALIDADES",
-      title: "¡Todo lo que necesitás\npara escalar!",
+      title: "Herramientas para\ngestionar tus campañas",
       description: "Creá tu campaña personalizada y conectá con los mejores creadores — todo desde una sola plataforma.",
       blocks: [
         {
@@ -436,7 +496,7 @@ const spanish: AppDictionary = {
       description: "Creadores es la plataforma que conecta marcas/agencias con los mejores creadores de contenido UGC & Influencers de Latinoamérica.",
       links: ["Creadores", "Marcas", "Precios", "Casos de éxito"],
       copyright: "\u00a9 2026 Creadores. Todos los derechos reservados.",
-      legal: ["Privacidad", "Términos", "Cookies"],
+      legal: ["Privacidad", "Términos"],
     },
   },
 };
@@ -459,13 +519,13 @@ const portuguese: AppDictionary = {
     },
     nav: {
       links: [
-        { label: "Sou Criador", href: "/creator/register" },
         { label: "Campanhas", href: "#campaigns" },
         { label: "Funcionalidades", href: "#features" },
         { label: "Preços", href: "#pricing" },
       ],
       signIn: "Entrar",
       startFree: "Cadastre-se grátis",
+      startFreeMobile: "Cadastre-se",
       signUpDropdown: {
         brand: { label: "Sou uma marca", description: "Conecte-se com criadores" },
         creator: { label: "Sou criador", description: "Monetize seu conteúdo" },
@@ -529,7 +589,7 @@ const portuguese: AppDictionary = {
     },
     campaignFeatures: {
       badge: "FUNCIONALIDADES",
-      title: "Lance e gerencie\nsuas campanhas",
+      title: "Ferramentas para\ngerenciar suas campanhas",
       description: "Crie sua campanha personalizada e conecte-se com os melhores criadores — tudo de uma única plataforma.",
       blocks: [
         {
@@ -579,7 +639,7 @@ const portuguese: AppDictionary = {
       description: "Conectamos os melhores criadores UGC com as marcas mais relevantes da América Latina.",
       links: ["Criadores", "Marcas", "Preços", "Casos de sucesso"],
       copyright: "\u00a9 2026 Creadores. Todos os direitos reservados.",
-      legal: ["Privacidade", "Termos", "Cookies"],
+      legal: ["Privacidade", "Termos"],
     },
   },
 };
@@ -593,4 +653,504 @@ const dictionaries: Record<Locale, AppDictionary> = {
 
 export function getDictionary(locale: Locale): AppDictionary {
   return dictionaries[locale] ?? dictionaries[DEFAULT_LOCALE];
+}
+
+const creatorHomeOverridesByLocale = {
+  en: {
+    hero: {
+      badge: "Official partners of",
+      line1: "MONETIZE",
+      line2: "YOUR",
+      line3: "",
+      line3Bold: "CONTENT",
+      rotatingWords: ["CONTENT", "TALENT", "CREATIVITY", "AUDIENCE", "PASSION"],
+      description:
+        "Creeadores is the platform that connects you with the best brands and agencies in Latin America. Apply to campaigns, create content and get paid securely.",
+      ctas: {
+        primary: "I'm a creator",
+        secondary: "I'm a brand",
+      },
+    },
+    nav: {
+      links: [
+        { label: "I'm a brand", href: "/" },
+        { label: "Features", href: "#features" },
+        { label: "Reputation", href: "#reputation" },
+      ],
+      signIn: "Sign in",
+      startFree: "Sign up for free",
+      startFreeMobile: "Sign up",
+      signUpDropdown: {
+        brand: { label: "I'm a brand", description: "Connect with creators" },
+        creator: { label: "I'm a creator", description: "Monetize your content" },
+      },
+    },
+    campaignTypes: {
+      badge: "OPPORTUNITIES",
+      title: "✨ Find the perfect\ncampaign for you",
+      description: "Apply to the campaign type that best matches your profile and start monetizing your content.",
+      scrollLabel: "Scroll down",
+      items: [
+        {
+          iconName: "zap",
+          title: "Flex Campaign",
+          description: "Brands find you based on your profile. Negotiate directly and agree on the terms that work best for you.",
+          bullets: ["Negotiate your own terms", "Direct communication with the brand"],
+        },
+        {
+          iconName: "megaphone",
+          title: "Influencer Campaign",
+          description: "Publish branded content on your profile and monetize your audience through authentic collaborations.",
+          bullets: ["Create and publish on your own profile", "Monetize your audience authentically"],
+        },
+        {
+          iconName: "camera",
+          title: "UGC Creator Campaign",
+          description: "Produce professional videos for brands using the resources they send you. You create, they publish.",
+          bullets: ["Receive briefs and brand assets", "Focus on creating high-quality content"],
+        },
+        {
+          iconName: "star",
+          title: "UGC + Influencer Campaign",
+          description: "The most complete opportunity: create content for the brand and publish it on your profile. Bigger impact, higher earnings.",
+          bullets: ["Create + publish = higher earnings", "The platform's most complete opportunity"],
+        },
+      ],
+    },
+    campaignFeatures: {
+      badge: "FEATURES",
+      title: "🛠️ Tools designed\nfor creators",
+      description: "Tools built so you can focus on what you do best: creating amazing content.",
+      ctaButton: "Create my profile",
+      blocks: [
+        {
+          iconName: "sliders",
+          title: "Your professional profile",
+          subtitle: "Build a profile that represents you and let brands discover you.",
+          image: "/campaign-create.jpg",
+          cards: [
+            { iconName: "clapperboard", title: "Visual portfolio + social media", description: "Showcase your best work and connect Instagram and TikTok to share your metrics with brands." },
+            { iconName: "lock", title: "Reputation system", description: "Each completed campaign grows your badge: Bronze -> Silver -> Gold. Brands prioritize creators with stronger reputations." },
+            { iconName: "wallet", title: "Rates and availability", description: "Set your rates by video length and show your availability so brands know when to contact you." },
+          ],
+          floatingCards: [
+            { iconName: "clapperboard", iconBg: "#0019DA", text: "Portfolio updated", subtext: "5 pieces", position: "-top-8 -right-14" },
+            { iconName: "package", iconBg: "#7C3AED", text: "Pending deliverables", subtext: "2 of 4 sent", position: "-bottom-8 -left-14" },
+            { iconName: "send", iconBg: "#22C55E", text: "Publication submitted", subtext: "Content approved", position: "-bottom-8 -right-14" },
+          ],
+        },
+        {
+          iconName: "users",
+          title: "Apply and get paid securely",
+          subtitle: "Find campaigns, negotiate and receive your payments — all from one platform.",
+          image: "/campaign-dashboard.jpg",
+          cards: [
+            { iconName: "send", title: "Smart applications", description: "Explore active campaigns, filter by category and budget, and apply with one click." },
+            { iconName: "wallet", title: "Direct negotiation", description: "Receive proposals, send counteroffers and agree on terms directly with the brand." },
+            { iconName: "lock", title: "Protected payout", description: "The deposit is released when the brand approves your content." },
+          ],
+          floatingCards: [
+            { iconName: "send", iconBg: "#EA580C", text: "Counteroffer sent", subtext: "2 min ago", position: "-top-8 -right-14" },
+            { iconName: "lock", iconBg: "#22C55E", customIcon: "campaign-status", text: "Campaign completed", subtext: "Payment released", position: "-bottom-8 -left-14" },
+            { iconName: "wallet", iconBg: "#00AEEF", customIcon: "mercadopago", text: "Mercado Pago", subtext: "Secure payout", position: "-bottom-8 -right-14" },
+          ],
+        },
+      ],
+    },
+    pricing: {
+      badge: "REPUTATION",
+      title: "⭐ Your reputation is\nyour best asset",
+      description: "Every completed campaign builds your reputation. Level up and unlock better opportunities.",
+      ctaButton: "Start monetizing your content",
+      plans: [
+        { name: "New", description: "You just joined Creeadores", price: null, period: "", features: [{ iconName: "users", text: "Basic profile" }, { iconName: "megaphone", text: "Limited applications" }, { iconName: "percent", text: "New creator badge" }], cta: "Create my profile", popular: true, iconName: "check", customPriceLabel: "Start here", popularLabel: "START HERE" },
+        { name: "Bronze", description: "Visible Bronze badge", price: null, period: "", features: [{ iconName: "users", text: "Verified profile" }, { iconName: "megaphone", text: "Visible Bronze badge" }, { iconName: "percent", text: "Unlimited applications" }], cta: "Start now", popular: false, iconName: "shield", customPriceLabel: "1+ campaigns" },
+        { name: "Silver", description: "Established creator", price: null, period: "", features: [{ iconName: "users", text: "Visible Silver badge" }, { iconName: "megaphone", text: "Priority in applications" }, { iconName: "percent", text: "Access to exclusive campaigns" }], cta: "Keep growing", popular: false, iconName: "award", customPriceLabel: "10+ campaigns" },
+        { name: "Gold", description: "Top creator on the platform", price: null, period: "", features: [{ iconName: "users", text: "Premium Gold badge" }, { iconName: "megaphone", text: "Maximum visibility" }, { iconName: "percent", text: "Direct invitations from brands" }], cta: "Reach Gold", popular: false, iconName: "crown", customPriceLabel: "100+ campaigns" },
+      ],
+    },
+    landingFooter: {
+      description: "Monetize your content by connecting with the best brands and agencies in Latin America.",
+      links: ["Opportunities", "How it works", "Reputation"],
+      copyright: "© 2026 Creadores. All rights reserved.",
+      legal: ["Privacy", "Terms"],
+    },
+  },
+  "es-AR": {
+    hero: {
+      badge: "Partners oficiales de",
+      line1: "MONETIZÁ",
+      line2: "TU",
+      line3: "",
+      line3Bold: "CONTENIDO",
+      rotatingWords: ["CONTENIDO", "TALENTO", "CREATIVIDAD", "AUDIENCIA", "PASIÓN"],
+      description:
+        "Creeadores es la plataforma que te conecta con las mejores marcas y agencias de Latinoamérica. Postulate a campañas, creá contenido y cobrá de forma segura.",
+      ctas: {
+        primary: "Soy creador",
+        secondary: "Soy marca",
+      },
+    },
+    nav: {
+      links: [
+        { label: "Soy marca", href: "/" },
+        { label: "Funcionalidades", href: "#features" },
+        { label: "Reputación", href: "#reputation" },
+      ],
+      signIn: "Iniciar sesion",
+      startFree: "Registrate gratis",
+      startFreeMobile: "Registrate",
+      signUpDropdown: {
+        brand: { label: "Soy una marca", description: "Conecta con creadores" },
+        creator: { label: "Soy creador", description: "Monetiza tu contenido" },
+      },
+    },
+    campaignTypes: {
+      badge: "OPORTUNIDADES",
+      title: "✨ Encontrá la campaña\nperfecta para vos",
+      description: "Postulate al tipo de campaña que mejor se adapte a tu perfil y empezá a monetizar tu contenido.",
+      scrollLabel: "Desliza hacia abajo",
+      items: [
+        {
+          iconName: "zap",
+          title: "Campaña Flex",
+          description: "Las marcas te encuentran según tu perfil. Negociá directamente y acordá los términos que te convengan.",
+          bullets: ["Negociá tus propios términos", "Comunicación directa con la marca"],
+        },
+        {
+          iconName: "megaphone",
+          title: "Campaña Influencer",
+          description: "Publicá contenido de marcas en tu perfil y monetizá tu audiencia con colaboraciones auténticas.",
+          bullets: ["Crea y publica en tu propio perfil", "Monetizá tu audiencia de forma auténtica"],
+        },
+        {
+          iconName: "camera",
+          title: "Campaña UGC Creator",
+          description: "Producí videos profesionales para marcas con los recursos que te envían. Vos creás, ellos publican.",
+          bullets: ["Recibí briefs y recursos de la marca", "Enfocate en crear contenido de calidad"],
+        },
+        {
+          iconName: "star",
+          title: "Campaña UGC + Influencer",
+          description: "La oportunidad más completa: producí contenido para la marca y publicalo en tu perfil. Doble impacto, mayor ingreso.",
+          bullets: ["Producí + publicá = mayor ingreso", "La oportunidad más completa de la plataforma"],
+        },
+      ],
+    },
+    campaignFeatures: {
+      badge: "FUNCIONALIDADES",
+      title: "🛠️ Herramientas diseñadas\npara creadores",
+      description: "Herramientas diseñadas para que puedas enfocarte en lo que mejor hacés: crear contenido increíble.",
+      ctaButton: "Crear mi perfil",
+      blocks: [
+        {
+          iconName: "sliders",
+          title: "Tu perfil profesional",
+          subtitle: "Construí un perfil que te represente y dejá que las marcas te encuentren.",
+          image: "/campaign-create.jpg",
+          cards: [
+            { iconName: "clapperboard", title: "Portafolio visual + social media", description: "Mostrá tus mejores trabajos y conectá tu Instagram y TikTok para compartir tus métricas con las marcas." },
+            { iconName: "lock", title: "Sistema de reputación", description: "Cada campaña completada suma a tu badge: Bronce -> Plata -> Oro. Las marcas priorizan creadores con mejor reputación." },
+            { iconName: "wallet", title: "Tarifas y disponibilidad", description: "Definí tus tarifas por tiempo de video y mostrá tu disponibilidad para que las marcas sepan cuándo contactarte." },
+          ],
+          floatingCards: [
+            { iconName: "clapperboard", iconBg: "#0019DA", text: "Portfolio actualizado", subtext: "5 trabajos", position: "-top-8 -right-14" },
+            { iconName: "package", iconBg: "#7C3AED", text: "Entregables pendientes", subtext: "2 de 4 enviados", position: "-bottom-8 -left-14" },
+            { iconName: "send", iconBg: "#22C55E", text: "Publicación enviada", subtext: "Contenido aprobado", position: "-bottom-8 -right-14" },
+          ],
+        },
+        {
+          iconName: "users",
+          title: "Postulate y cobrá seguro",
+          subtitle: "Encontrá campañas, negociá y recibí tus pagos, todo desde la plataforma.",
+          image: "/campaign-dashboard.jpg",
+          cards: [
+            { iconName: "send", title: "Postulaciones inteligentes", description: "Explorá campañas activas, filtrá por categoría y presupuesto, y postulate con un clic." },
+            { iconName: "wallet", title: "Negociación directa", description: "Recibí propuestas, enviá contraofertas y acordá los términos directamente con la marca." },
+            { iconName: "lock", title: "Cobro protegido", description: "El depósito se libera cuando la marca aprueba tu contenido." },
+          ],
+          floatingCards: [
+            { iconName: "send", iconBg: "#EA580C", text: "Contraoferta enviada", subtext: "Hace 2 min", position: "-top-8 -right-14" },
+            { iconName: "lock", iconBg: "#22C55E", customIcon: "campaign-status", text: "Campaña finalizada", subtext: "Pago liberado", position: "-bottom-8 -left-14" },
+            { iconName: "wallet", iconBg: "#00AEEF", customIcon: "mercadopago", text: "Mercado Pago", subtext: "Cobro seguro", position: "-bottom-8 -right-14" },
+          ],
+        },
+      ],
+    },
+    pricing: {
+      badge: "REPUTACIÓN",
+      title: "⭐ Tu reputación es\ntu mejor activo",
+      description: "Cada campaña completada construye tu reputación. Subí de nivel y accedé a mejores oportunidades.",
+      ctaButton: "Comenzá a monetizar tu contenido",
+      plans: [
+        { name: "Nuevo", description: "Recién llegaste a Creeadores", price: null, period: "", features: [{ iconName: "users", text: "Perfil básico" }, { iconName: "megaphone", text: "Postulaciones limitadas" }, { iconName: "percent", text: "Badge de nuevo creador" }], cta: "Crear mi perfil", popular: true, iconName: "check", customPriceLabel: "Empezá acá", popularLabel: "COMENZÁ ACÁ" },
+        { name: "Bronce", description: "Badge Bronce visible", price: null, period: "", features: [{ iconName: "users", text: "Perfil verificado" }, { iconName: "megaphone", text: "Badge Bronce visible" }, { iconName: "percent", text: "Postulaciones ilimitadas" }], cta: "Empezar ahora", popular: false, iconName: "shield", customPriceLabel: "1+ campañas" },
+        { name: "Plata", description: "Creador con trayectoria", price: null, period: "", features: [{ iconName: "users", text: "Badge Plata visible" }, { iconName: "megaphone", text: "Prioridad en postulaciones" }, { iconName: "percent", text: "Acceso a campañas exclusivas" }], cta: "Seguir creciendo", popular: false, iconName: "award", customPriceLabel: "10+ campañas" },
+        { name: "Oro", description: "Top creator de la plataforma", price: null, period: "", features: [{ iconName: "users", text: "Badge Oro premium" }, { iconName: "megaphone", text: "Máxima visibilidad" }, { iconName: "percent", text: "Invitaciones directas de marcas" }], cta: "Llegar a Oro", popular: false, iconName: "crown", customPriceLabel: "100+ campañas" },
+      ],
+    },
+    landingFooter: {
+      description: "Monetizá tu contenido conectando con las mejores marcas y agencias de Latinoamérica.",
+      links: ["Oportunidades", "Cómo funciona", "Reputación"],
+      copyright: "© 2026 Creadores. Todos los derechos reservados.",
+      legal: ["Privacidad", "Términos"],
+    },
+  },
+  "es-MX": {
+    hero: {
+      badge: "Partners oficiales de",
+      line1: "MONETIZÁ",
+      line2: "TU",
+      line3: "",
+      line3Bold: "CONTENIDO",
+      rotatingWords: ["CONTENIDO", "TALENTO", "CREATIVIDAD", "AUDIENCIA", "PASIÓN"],
+      description:
+        "Creeadores es la plataforma que te conecta con las mejores marcas y agencias de Latinoamérica. Postulate a campañas, creá contenido y cobrá de forma segura.",
+      ctas: {
+        primary: "Soy creador",
+        secondary: "Soy marca",
+      },
+    },
+    nav: {
+      links: [
+        { label: "Soy marca", href: "/" },
+        { label: "Funcionalidades", href: "#features" },
+        { label: "Reputación", href: "#reputation" },
+      ],
+      signIn: "Iniciar sesion",
+      startFree: "Registrate gratis",
+      startFreeMobile: "Registrate",
+      signUpDropdown: {
+        brand: { label: "Soy una marca", description: "Conecta con creadores" },
+        creator: { label: "Soy creador", description: "Monetiza tu contenido" },
+      },
+    },
+    campaignTypes: {
+      badge: "OPORTUNIDADES",
+      title: "✨ Encontrá la campaña\nperfecta para vos",
+      description: "Postulate al tipo de campaña que mejor se adapte a tu perfil y empezá a monetizar tu contenido.",
+      scrollLabel: "Desliza hacia abajo",
+      items: [
+        {
+          iconName: "zap",
+          title: "Campaña Flex",
+          description: "Las marcas te encuentran según tu perfil. Negociá directamente y acordá los términos que te convengan.",
+          bullets: ["Negociá tus propios términos", "Comunicación directa con la marca"],
+        },
+        {
+          iconName: "megaphone",
+          title: "Campaña Influencer",
+          description: "Publicá contenido de marcas en tu perfil y monetizá tu audiencia con colaboraciones auténticas.",
+          bullets: ["Crea y publica en tu propio perfil", "Monetizá tu audiencia de forma auténtica"],
+        },
+        {
+          iconName: "camera",
+          title: "Campaña UGC Creator",
+          description: "Producí videos profesionales para marcas con los recursos que te envían. Vos creás, ellos publican.",
+          bullets: ["Recibí briefs y recursos de la marca", "Enfocate en crear contenido de calidad"],
+        },
+        {
+          iconName: "star",
+          title: "Campaña UGC + Influencer",
+          description: "La oportunidad más completa: producí contenido para la marca y publicalo en tu perfil. Doble impacto, mayor ingreso.",
+          bullets: ["Producí + publicá = mayor ingreso", "La oportunidad más completa de la plataforma"],
+        },
+      ],
+    },
+    campaignFeatures: {
+      badge: "FUNCIONALIDADES",
+      title: "🛠️ Herramientas diseñadas\npara creadores",
+      description: "Herramientas diseñadas para que puedas enfocarte en lo que mejor hacés: crear contenido increíble.",
+      ctaButton: "Crear mi perfil",
+      blocks: [
+        {
+          iconName: "sliders",
+          title: "Tu perfil profesional",
+          subtitle: "Construí un perfil que te represente y dejá que las marcas te encuentren.",
+          image: "/campaign-create.jpg",
+          cards: [
+            { iconName: "clapperboard", title: "Portafolio visual + social media", description: "Mostrá tus mejores trabajos y conectá tu Instagram y TikTok para compartir tus métricas con las marcas." },
+            { iconName: "lock", title: "Sistema de reputación", description: "Cada campaña completada suma a tu badge: Bronce -> Plata -> Oro. Las marcas priorizan creadores con mejor reputación." },
+            { iconName: "wallet", title: "Tarifas y disponibilidad", description: "Definí tus tarifas por tiempo de video y mostrá tu disponibilidad para que las marcas sepan cuándo contactarte." },
+          ],
+          floatingCards: [
+            { iconName: "clapperboard", iconBg: "#0019DA", text: "Portfolio actualizado", subtext: "5 trabajos", position: "-top-8 -right-14" },
+            { iconName: "package", iconBg: "#7C3AED", text: "Entregables pendientes", subtext: "2 de 4 enviados", position: "-bottom-8 -left-14" },
+            { iconName: "send", iconBg: "#22C55E", text: "Publicación enviada", subtext: "Contenido aprobado", position: "-bottom-8 -right-14" },
+          ],
+        },
+        {
+          iconName: "users",
+          title: "Postulate y cobrá seguro",
+          subtitle: "Encontrá campañas, negociá y recibí tus pagos, todo desde la plataforma.",
+          image: "/campaign-dashboard.jpg",
+          cards: [
+            { iconName: "send", title: "Postulaciones inteligentes", description: "Explorá campañas activas, filtrá por categoría y presupuesto, y postulate con un clic." },
+            { iconName: "wallet", title: "Negociación directa", description: "Recibí propuestas, enviá contraofertas y acordá los términos directamente con la marca." },
+            { iconName: "lock", title: "Cobro protegido", description: "El depósito se libera cuando la marca aprueba tu contenido." },
+          ],
+          floatingCards: [
+            { iconName: "send", iconBg: "#EA580C", text: "Contraoferta enviada", subtext: "Hace 2 min", position: "-top-8 -right-14" },
+            { iconName: "lock", iconBg: "#22C55E", customIcon: "campaign-status", text: "Campaña finalizada", subtext: "Pago liberado", position: "-bottom-8 -left-14" },
+            { iconName: "wallet", iconBg: "#00AEEF", customIcon: "mercadopago", text: "Mercado Pago", subtext: "Cobro seguro", position: "-bottom-8 -right-14" },
+          ],
+        },
+      ],
+    },
+    pricing: {
+      badge: "REPUTACIÓN",
+      title: "⭐ Tu reputación es\ntu mejor activo",
+      description: "Cada campaña completada construye tu reputación. Subí de nivel y accedé a mejores oportunidades.",
+      ctaButton: "Comenzá a monetizar tu contenido",
+      plans: [
+        { name: "Nuevo", description: "Recién llegaste a Creeadores", price: null, period: "", features: [{ iconName: "users", text: "Perfil básico" }, { iconName: "megaphone", text: "Postulaciones limitadas" }, { iconName: "percent", text: "Badge de nuevo creador" }], cta: "Crear mi perfil", popular: true, iconName: "check", customPriceLabel: "Empezá acá", popularLabel: "COMENZÁ ACÁ" },
+        { name: "Bronce", description: "Badge Bronce visible", price: null, period: "", features: [{ iconName: "users", text: "Perfil verificado" }, { iconName: "megaphone", text: "Badge Bronce visible" }, { iconName: "percent", text: "Postulaciones ilimitadas" }], cta: "Empezar ahora", popular: false, iconName: "shield", customPriceLabel: "1+ campañas" },
+        { name: "Plata", description: "Creador con trayectoria", price: null, period: "", features: [{ iconName: "users", text: "Badge Plata visible" }, { iconName: "megaphone", text: "Prioridad en postulaciones" }, { iconName: "percent", text: "Acceso a campañas exclusivas" }], cta: "Seguir creciendo", popular: false, iconName: "award", customPriceLabel: "10+ campañas" },
+        { name: "Oro", description: "Top creator de la plataforma", price: null, period: "", features: [{ iconName: "users", text: "Badge Oro premium" }, { iconName: "megaphone", text: "Máxima visibilidad" }, { iconName: "percent", text: "Invitaciones directas de marcas" }], cta: "Llegar a Oro", popular: false, iconName: "crown", customPriceLabel: "100+ campañas" },
+      ],
+    },
+    landingFooter: {
+      description: "Monetizá tu contenido conectando con las mejores marcas y agencias de Latinoamérica.",
+      links: ["Oportunidades", "Cómo funciona", "Reputación"],
+      copyright: "© 2026 Creadores. Todos los derechos reservados.",
+      legal: ["Privacidad", "Términos"],
+    },
+  },
+  pt: {
+    hero: {
+      badge: "Parceiros oficiais de",
+      line1: "MONETIZE",
+      line2: "SEU",
+      line3: "",
+      line3Bold: "CONTEÚDO",
+      rotatingWords: ["CONTEÚDO", "TALENTO", "CRIATIVIDADE", "AUDIÊNCIA", "PAIXÃO"],
+      description:
+        "Creeadores é a plataforma que conecta você às melhores marcas e agências da América Latina. Candidate-se a campanhas, crie conteúdo e receba com segurança.",
+      ctas: {
+        primary: "Sou criador",
+        secondary: "Sou marca",
+      },
+    },
+    nav: {
+      links: [
+        { label: "Sou marca", href: "/" },
+        { label: "Funcionalidades", href: "#features" },
+        { label: "Reputação", href: "#reputation" },
+      ],
+      signIn: "Entrar",
+      startFree: "Cadastre-se grátis",
+      startFreeMobile: "Cadastre-se",
+      signUpDropdown: {
+        brand: { label: "Sou uma marca", description: "Conecte-se com criadores" },
+        creator: { label: "Sou criador", description: "Monetize seu conteúdo" },
+      },
+    },
+    campaignTypes: {
+      badge: "OPORTUNIDADES",
+      title: "✨ Encontre a campanha\nperfeita para você",
+      description: "Candidate-se ao tipo de campanha que melhor combina com o seu perfil e comece a monetizar seu conteúdo.",
+      scrollLabel: "Deslize para baixo",
+      items: [
+        {
+          iconName: "zap",
+          title: "Campanha Flex",
+          description: "As marcas encontram você pelo seu perfil. Negocie diretamente e combine os termos que fazem sentido para você.",
+          bullets: ["Negocie seus próprios termos", "Comunicação direta com a marca"],
+        },
+        {
+          iconName: "megaphone",
+          title: "Campanha Influencer",
+          description: "Publique conteúdo de marcas no seu perfil e monetize sua audiência com colaborações autênticas.",
+          bullets: ["Crie e publique no seu próprio perfil", "Monetize sua audiência de forma autêntica"],
+        },
+        {
+          iconName: "camera",
+          title: "Campanha UGC Creator",
+          description: "Produza vídeos profissionais para marcas com os recursos que elas enviam. Você cria, elas publicam.",
+          bullets: ["Receba briefs e materiais da marca", "Foque em criar conteúdo de alta qualidade"],
+        },
+        {
+          iconName: "star",
+          title: "Campanha UGC + Influencer",
+          description: "A oportunidade mais completa: produza conteúdo para a marca e publique no seu perfil. Mais impacto, maior ganho.",
+          bullets: ["Produzir + publicar = maior ganho", "A oportunidade mais completa da plataforma"],
+        },
+      ],
+    },
+    campaignFeatures: {
+      badge: "FUNCIONALIDADES",
+      title: "🛠️ Ferramentas pensadas\npara criadores",
+      description: "Ferramentas pensadas para que você foque no que faz de melhor: criar conteúdo incrível.",
+      ctaButton: "Criar meu perfil",
+      blocks: [
+        {
+          iconName: "sliders",
+          title: "Seu perfil profissional",
+          subtitle: "Construa um perfil que represente você e deixe as marcas encontrarem seu trabalho.",
+          image: "/campaign-create.jpg",
+          cards: [
+            { iconName: "clapperboard", title: "Portfólio visual + redes sociais", description: "Mostre seus melhores trabalhos e conecte Instagram e TikTok para compartilhar suas métricas com as marcas." },
+            { iconName: "lock", title: "Sistema de reputação", description: "Cada campanha concluída fortalece seu badge: Bronze -> Prata -> Ouro. As marcas priorizam criadores com melhor reputação." },
+            { iconName: "wallet", title: "Tarifas e disponibilidade", description: "Defina suas tarifas por duração de vídeo e mostre sua disponibilidade para que as marcas saibam quando falar com você." },
+          ],
+          floatingCards: [
+            { iconName: "clapperboard", iconBg: "#0019DA", text: "Portfólio atualizado", subtext: "5 trabalhos", position: "-top-8 -right-14" },
+            { iconName: "package", iconBg: "#7C3AED", text: "Entregáveis pendentes", subtext: "2 de 4 enviados", position: "-bottom-8 -left-14" },
+            { iconName: "send", iconBg: "#22C55E", text: "Publicação enviada", subtext: "Conteúdo aprovado", position: "-bottom-8 -right-14" },
+          ],
+        },
+        {
+          iconName: "users",
+          title: "Candidate-se e receba com segurança",
+          subtitle: "Encontre campanhas, negocie e receba seus pagamentos, tudo dentro da plataforma.",
+          image: "/campaign-dashboard.jpg",
+          cards: [
+            { iconName: "send", title: "Candidaturas inteligentes", description: "Explore campanhas ativas, filtre por categoria e orçamento e candidate-se com um clique." },
+            { iconName: "wallet", title: "Negociação direta", description: "Receba propostas, envie contrapropostas e combine os termos diretamente com a marca." },
+            { iconName: "lock", title: "Recebimento protegido", description: "O valor é liberado quando a marca aprova o seu conteúdo." },
+          ],
+          floatingCards: [
+            { iconName: "send", iconBg: "#EA580C", text: "Contraproposta enviada", subtext: "Há 2 min", position: "-top-8 -right-14" },
+            { iconName: "lock", iconBg: "#22C55E", customIcon: "campaign-status", text: "Campanha finalizada", subtext: "Pagamento liberado", position: "-bottom-8 -left-14" },
+            { iconName: "wallet", iconBg: "#00AEEF", customIcon: "mercadopago", text: "Mercado Pago", subtext: "Recebimento seguro", position: "-bottom-8 -right-14" },
+          ],
+        },
+      ],
+    },
+    pricing: {
+      badge: "REPUTAÇÃO",
+      title: "⭐ Sua reputação é\nseu melhor ativo",
+      description: "Cada campanha concluída fortalece sua reputação. Suba de nível e acesse oportunidades melhores.",
+      ctaButton: "Comece a monetizar seu conteúdo",
+      plans: [
+        { name: "Novo", description: "Você acabou de chegar ao Creeadores", price: null, period: "", features: [{ iconName: "users", text: "Perfil básico" }, { iconName: "megaphone", text: "Candidaturas limitadas" }, { iconName: "percent", text: "Badge de novo criador" }], cta: "Criar meu perfil", popular: true, iconName: "check", customPriceLabel: "Comece aqui", popularLabel: "COMECE AQUI" },
+        { name: "Bronze", description: "Badge Bronze visível", price: null, period: "", features: [{ iconName: "users", text: "Perfil verificado" }, { iconName: "megaphone", text: "Badge Bronze visível" }, { iconName: "percent", text: "Candidaturas ilimitadas" }], cta: "Começar agora", popular: false, iconName: "shield", customPriceLabel: "1+ campanhas" },
+        { name: "Prata", description: "Criador com trajetória", price: null, period: "", features: [{ iconName: "users", text: "Badge Prata visível" }, { iconName: "megaphone", text: "Prioridade nas candidaturas" }, { iconName: "percent", text: "Acesso a campanhas exclusivas" }], cta: "Continuar crescendo", popular: false, iconName: "award", customPriceLabel: "10+ campanhas" },
+        { name: "Ouro", description: "Top creator da plataforma", price: null, period: "", features: [{ iconName: "users", text: "Badge Ouro premium" }, { iconName: "megaphone", text: "Visibilidade máxima" }, { iconName: "percent", text: "Convites diretos de marcas" }], cta: "Chegar ao Ouro", popular: false, iconName: "crown", customPriceLabel: "100+ campanhas" },
+      ],
+    },
+    landingFooter: {
+      description: "Monetize seu conteúdo conectando-se com as melhores marcas e agências da América Latina.",
+      links: ["Oportunidades", "Como funciona", "Reputação"],
+      copyright: "© 2026 Creadores. Todos os direitos reservados.",
+      legal: ["Privacidade", "Termos"],
+    },
+  },
+} satisfies Record<Locale, Partial<HomeDictionary>>;
+
+export function getCreatorDictionary(locale: Locale): AppDictionary {
+  const base = getDictionary(locale);
+  const creatorHomeOverrides = creatorHomeOverridesByLocale[locale] ?? creatorHomeOverridesByLocale[DEFAULT_LOCALE];
+  return {
+    ...base,
+    home: {
+      ...base.home,
+      hero: creatorHomeOverrides.hero ?? base.home.hero,
+      nav: creatorHomeOverrides.nav ?? base.home.nav,
+      campaignTypes: creatorHomeOverrides.campaignTypes ?? base.home.campaignTypes,
+      campaignFeatures: creatorHomeOverrides.campaignFeatures ?? base.home.campaignFeatures,
+      pricing: creatorHomeOverrides.pricing ?? base.home.pricing,
+      landingFooter: creatorHomeOverrides.landingFooter ?? base.home.landingFooter,
+    },
+  };
 }

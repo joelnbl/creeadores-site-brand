@@ -1,7 +1,8 @@
 "use client"
 
 import { createContext, useContext, useEffect, useState } from "react"
-import { type Locale, resolveLocale, LANGUAGE_COOKIE_NAME, LANGUAGE_STORAGE_KEY, getDictionary, type AppDictionary } from "@/lib/i18n"
+import { usePathname } from "next/navigation"
+import { type Locale, resolveLocale, LANGUAGE_COOKIE_NAME, LANGUAGE_STORAGE_KEY, getCreatorDictionary, getDictionary, type AppDictionary } from "@/lib/i18n"
 
 type LanguageContextType = {
   locale: Locale
@@ -18,12 +19,16 @@ export function LanguageProvider({
   children: React.ReactNode
   initialLocale: Locale
 }) {
+  const pathname = usePathname()
+  const isCreatorRoute = pathname?.startsWith("/creator") ?? false
   const [locale, setLocaleState] = useState<Locale>(initialLocale)
-  const [dictionary, setDictionary] = useState<AppDictionary>(getDictionary(initialLocale))
+  const [dictionary, setDictionary] = useState<AppDictionary>(
+    isCreatorRoute ? getCreatorDictionary(initialLocale) : getDictionary(initialLocale),
+  )
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale)
-    setDictionary(getDictionary(newLocale))
+    setDictionary(isCreatorRoute ? getCreatorDictionary(newLocale) : getDictionary(newLocale))
 
     if (typeof window !== "undefined") {
       localStorage.setItem(LANGUAGE_STORAGE_KEY, newLocale)
@@ -35,8 +40,8 @@ export function LanguageProvider({
   }
 
   useEffect(() => {
-    setDictionary(getDictionary(locale))
-  }, [locale])
+    setDictionary(isCreatorRoute ? getCreatorDictionary(locale) : getDictionary(locale))
+  }, [locale, isCreatorRoute])
 
   return (
     <LanguageContext.Provider value={{ locale, dictionary, setLocale }}>

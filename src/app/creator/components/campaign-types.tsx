@@ -30,7 +30,6 @@ export function CampaignTypes() {
       className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-16 overflow-hidden"
       style={{ backgroundColor: "#FAFAFE" }}
     >
-      {/* Cross-hatch grid texture */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.4]"
         style={{
@@ -40,7 +39,6 @@ export function CampaignTypes() {
         }}
       />
       <div className="relative max-w-[1440px] mx-auto">
-        {/* Header */}
         <div className="text-center mb-10 sm:mb-16">
           <span
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5 backdrop-blur-sm"
@@ -58,23 +56,20 @@ export function CampaignTypes() {
             <ShinyText text={t.badge} color="#0019DA" shineColor="#93C5FD" speed={2} spread={90} />
           </span>
           <h2 style={{ fontSize: "clamp(22px, 3.5vw, 42px)", fontWeight: 700, lineHeight: 1.2, color: "#0A0A1A", whiteSpace: "pre-line", textTransform: "uppercase", letterSpacing: "-0.02em" }}>
-            <Megaphone className="inline-block align-middle" style={{ width: "0.85em", height: "0.85em", color: "#0019DA" }} /> {t.title}
+            {t.title}
           </h2>
           <p className="mt-4 mx-auto max-w-2xl text-gray-500 text-[14px] sm:text-[16px]" style={{ lineHeight: 1.7 }}>
             {t.description}
           </p>
         </div>
 
-        {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 max-w-[1060px] mx-auto">
           {t.items.map((item, i) => (
             <CampaignCard key={item.title} item={item} index={i} />
           ))}
         </div>
 
-        {/* Scroll down indicator */}
         <div className="flex flex-col items-center mt-14 gap-3">
-          {/* Mouse icon */}
           <div
             className="w-7 h-11 rounded-full flex justify-center pt-2"
             style={{ border: "2px solid rgba(0, 25, 218, 0.2)" }}
@@ -103,7 +98,6 @@ function CampaignCard({ item, index }: { item: CampaignTypeItem; index: number }
       spotlightColor={palette.spotlight}
       hoverBorderColor={palette.color}
     >
-      {/* Icon */}
       <div
         className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0"
         style={{ backgroundColor: palette.bg, border: `1px solid ${palette.border}` }}
@@ -111,7 +105,6 @@ function CampaignCard({ item, index }: { item: CampaignTypeItem; index: number }
         <Icon size={22} style={{ color: palette.color }} />
       </div>
 
-      {/* Content */}
       <div className="flex flex-col min-w-0 flex-1">
         <div className="flex items-center gap-2" style={{ marginBottom: "4px" }}>
           <h3 className="text-[15px] sm:text-[17px]" style={{ fontWeight: 700, color: "#0A0A1A" }}>
@@ -172,3 +165,4 @@ function CampaignCard({ item, index }: { item: CampaignTypeItem; index: number }
     </SpotlightCard>
   )
 }
+

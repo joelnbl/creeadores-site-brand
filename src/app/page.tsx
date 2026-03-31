@@ -3,7 +3,9 @@
 import { useState, useRef, useEffect } from "react"
 import { Building2, ChevronDown, Handshake, UserRound } from "lucide-react"
 import { Logo } from "@/components/logo"
+import { LanguageMenu } from "@/components/language-menu"
 import { useLanguage } from "@/components/language-provider"
+import { analytics } from "@/lib/analytics"
 import { appLink } from "@/lib/links"
 import { CreatorCard } from "@/components/landing/creator-card"
 import { VerticalMarquee } from "@/components/landing/vertical-marquee"
@@ -25,28 +27,28 @@ const col1 = [
 const col2 = [
   { name: "Sofia Martinez", category: "Buenos Aires, ARG", followers: "31k", rating: 5, badge: "oro" as const, price: "62.000", image: "https://images.unsplash.com/photo-1749318104909-ee768bac4d7e?w=400&h=500&fit=crop&crop=face" },
   { name: "Mateo Rivera", category: "Caracas, VE", followers: "6.1k", rating: 4, badge: "bronce" as const, price: "19.000", image: "https://images.unsplash.com/photo-1759415491301-3cd2da948c17?w=400&h=500&fit=crop&crop=face" },
-  { name: "Diego Salazar", category: "Tucumán, ARG", followers: "14k", rating: 4, badge: "plata" as const, price: "28.000", image: "https://images.unsplash.com/photo-1633469926055-b1503bfa541d?w=400&h=500&fit=crop&crop=face" },
-  { name: "Mariana Castillo", category: "Mar del Plata, ARG", followers: "21k", rating: 5, badge: "oro" as const, price: "48.000", image: "https://images.unsplash.com/photo-1694847035685-6c28c1cf19d0?w=400&h=500&fit=crop&crop=face" },
-  { name: "Tomas Gutierrez", category: "Monterrey, MX", followers: "2.8k", rating: 3, badge: "bronce" as const, price: "15.500", image: "https://images.unsplash.com/photo-1760716054699-ef7d33a36660?w=400&h=500&fit=crop&crop=face" },
-  { name: "Gabriela Rios", category: "La Plata, ARG", followers: "15k", rating: 4, badge: "plata" as const, price: "32.000", image: "https://images.unsplash.com/photo-1568236645308-b332c0acb6db?w=400&h=500&fit=crop&crop=face" },
+  { name: "Diego Salazar", category: "Tucumán, ARG", followers: "14k", rating: 4, badge: "plata" as const, price: "28.000", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face" },
+  { name: "Mariana Castillo", category: "Mar del Plata, ARG", followers: "21k", rating: 5, badge: "oro" as const, price: "48.000", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop&crop=face" },
+  { name: "Tomas Gutierrez", category: "Monterrey, MX", followers: "2.8k", rating: 3, badge: "bronce" as const, price: "15.500", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&h=500&fit=crop&crop=face" },
+  { name: "Gabriela Rios", category: "La Plata, ARG", followers: "15k", rating: 4, badge: "plata" as const, price: "32.000", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face" },
 ]
 
 const col3 = [
-  { name: "Ana Garcia", category: "Salta, ARG", followers: "19k", rating: 5, badge: "plata" as const, price: "35.000", image: "https://images.unsplash.com/photo-1695051153795-2c819e6fffc9?w=400&h=500&fit=crop&crop=face" },
-  { name: "Marco Alvarez", category: "Guadalajara, MX", followers: "11k", rating: 4, badge: "bronce" as const, price: "30.000", image: "https://images.unsplash.com/photo-1719390223407-95e0ad542385?w=400&h=500&fit=crop&crop=face" },
-  { name: "Isabella Lopez", category: "Buenos Aires, ARG", followers: "4.3k", rating: 3, badge: "bronce" as const, price: "17.000", image: "https://images.unsplash.com/photo-1740510294234-f1710f12f372?w=400&h=500&fit=crop&crop=face" },
+  { name: "Ana Garcia", category: "CDMX, MX", followers: "19k", rating: 5, badge: "plata" as const, price: "35.000", image: "https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=400&h=500&fit=crop&crop=face" },
+  { name: "Marco Alvarez", category: "Guadalajara, MX", followers: "11k", rating: 4, badge: "bronce" as const, price: "30.000", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&crop=face" },
+  { name: "Isabella Lopez", category: "Buenos Aires, ARG", followers: "4.3k", rating: 3, badge: "bronce" as const, price: "17.000", image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=500&fit=crop&crop=face" },
   { name: "Nicolas Varela", category: "Córdoba, ARG", followers: "9.5k", rating: 4, badge: "plata" as const, price: "26.000", image: "https://images.unsplash.com/photo-1639422633773-041d9fa609af?w=400&h=500&fit=crop&crop=face" },
-  { name: "Catalina Mora", category: "Maracaibo, VE", followers: "27k", rating: 5, badge: "oro" as const, price: "52.000", image: "https://images.unsplash.com/photo-1742276720784-c5b018cf0d38?w=400&h=500&fit=crop&crop=face" },
+  { name: "Catalina Mora", category: "Maracaibo, VE", followers: "27k", rating: 5, badge: "oro" as const, price: "52.000", image: "https://images.unsplash.com/photo-1618835962148-cf177563c6c0?w=400&h=500&fit=crop&crop=face" },
   { name: "Emilio Suarez", category: "Neuquén, ARG", followers: "3.1k", rating: 3, badge: "bronce" as const, price: "15.800", image: "https://images.unsplash.com/photo-1649440100794-0776df1177b0?w=400&h=500&fit=crop&crop=face" },
 ]
 
 const col4 = [
   { name: "Laura Herrera", category: "Buenos Aires, ARG", followers: "10k", rating: 3, badge: "plata" as const, price: "24.000", image: "https://images.unsplash.com/photo-1669502299593-5dbb23edfdb4?w=400&h=500&fit=crop&crop=face" },
   { name: "Mateo Ruiz", category: "Rosario, ARG", followers: "7.2k", rating: 4, badge: "bronce" as const, price: "20.000", image: "https://images.unsplash.com/photo-1717700921740-a1440f3b89a4?w=400&h=500&fit=crop&crop=face" },
-  { name: "Andres Moreno", category: "Valparaíso, CL", followers: "9.1k", rating: 5, badge: "oro" as const, price: "27.500", image: "https://images.unsplash.com/photo-1602339824025-b1b13c64ce56?w=400&h=500&fit=crop&crop=face" },
+  { name: "Andres Moreno", category: "Valparaíso, CL", followers: "9.1k", rating: 5, badge: "oro" as const, price: "27.500", image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=500&fit=crop&crop=face" },
   { name: "Daniela Ortiz", category: "Mendoza, ARG", followers: "16k", rating: 4, badge: "plata" as const, price: "33.000", image: "https://images.unsplash.com/photo-1756418940569-fce82e2223f3?w=400&h=500&fit=crop&crop=face" },
   { name: "Felipe Castro", category: "CDMX, MX", followers: "4.8k", rating: 3, badge: "bronce" as const, price: "16.000", image: "https://images.unsplash.com/photo-1571764304303-978699b70f5a?w=400&h=500&fit=crop&crop=face" },
-  { name: "Renata Silva", category: "Córdoba, ARG", followers: "22k", rating: 5, badge: "oro" as const, price: "42.000", image: "https://images.unsplash.com/photo-1624461213536-cd6b021ab6b6?w=400&h=500&fit=crop&crop=face" },
+  { name: "Renata Silva", category: "Córdoba, ARG", followers: "22k", rating: 5, badge: "oro" as const, price: "42.000", image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=500&fit=crop&crop=face" },
 ]
 
 const col5 = [
@@ -66,6 +68,14 @@ const columns = [
   { data: col5, reverse: false },
 ]
 
+function resolveLandingHref(href: string) {
+  if (href.startsWith("#") || href.startsWith("http")) {
+    return href
+  }
+
+  return appLink(href)
+}
+
 function LandingHeader() {
   const { dictionary } = useLanguage()
   const { nav } = dictionary.home
@@ -80,16 +90,68 @@ function LandingHeader() {
     return () => document.removeEventListener("mousedown", handleClick)
   }, [])
 
+  function handleSignUpMenuToggle() {
+    const nextOpen = !open
+    setOpen(nextOpen)
+
+    if (nextOpen) {
+      analytics.track("signup_options_opened", {
+        location: "header",
+        menu_name: "start_free",
+      })
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 bg-white/60 backdrop-blur-lg" style={{ boxShadow: "0 2px 20px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04)" }}>
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-8 lg:px-16 py-[22px] relative">
-        <Logo href="/" variant="blue" className="h-[22px] flex-shrink-0" />
+        <Logo
+          href="/"
+          variant="blue"
+          className="h-[22px] flex-shrink-0"
+          onClick={() =>
+            analytics.trackMarketingNavClicked({
+              label: "logo",
+              location: "header",
+              destination: "/",
+              linkType: "logo",
+            })
+          }
+        />
 
         <div className="hidden min-[1180px]:flex items-center gap-6">
+          <a
+            href="/creator"
+            onClick={() =>
+              analytics.trackMarketingNavClicked({
+                label: "Soy creador",
+                location: "header",
+                destination: "/creator",
+                linkType: "navigation",
+              })
+            }
+            className="group relative text-gray-600 hover:text-[#0019DA] transition-colors pb-1"
+            style={{ fontSize: "14px", fontWeight: 500 }}
+          >
+            Soy creador
+            <span
+              className="absolute bottom-0 left-1/2 h-[2px] w-0 group-hover:w-full group-hover:left-0 transition-all duration-300 rounded-full"
+              style={{ background: "linear-gradient(90deg, #0019DA, #633CFF)" }}
+            />
+          </a>
+
           {nav.links.map((link) => (
             <a
               key={link.href}
-              href={link.href.startsWith("#") ? link.href : appLink(link.href)}
+              href={resolveLandingHref(link.href)}
+              onClick={() =>
+                analytics.trackMarketingNavClicked({
+                  label: link.label,
+                  location: "header",
+                  destination: resolveLandingHref(link.href),
+                  linkType: link.href.startsWith("#") ? "anchor" : "navigation",
+                })
+              }
               className="group relative text-gray-600 hover:text-[#0019DA] transition-colors pb-1"
               style={{ fontSize: "14px", fontWeight: 500 }}
             >
@@ -102,9 +164,19 @@ function LandingHeader() {
           ))}
         </div>
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-3">
+          <LanguageMenu variant="light" />
+
           <a
             href={appLink("/users/login")}
+            onClick={() =>
+              analytics.trackMarketingCtaClicked({
+                ctaName: "sign_in",
+                location: "header",
+                destination: appLink("/users/login"),
+                targetUserType: "existing_user",
+              })
+            }
             className="hidden sm:block text-gray-700 hover:text-[#0019DA] transition-colors"
             style={{ fontSize: "14px", fontWeight: 500 }}
           >
@@ -114,11 +186,12 @@ function LandingHeader() {
           {/* Sign-up dropdown */}
           <div ref={ref} className="relative">
             <button
-              onClick={() => setOpen((v) => !v)}
+              onClick={handleSignUpMenuToggle}
               className="bg-[#0019DA] text-white px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-full hover:bg-[#0014B0] transition-colors cursor-pointer flex items-center gap-1.5"
               style={{ fontSize: "12px", fontWeight: 600 }}
             >
-              {nav.startFree}
+              <span className="sm:hidden">{nav.startFreeMobile}</span>
+              <span className="hidden sm:inline">{nav.startFree}</span>
               <ChevronDown
                 size={14}
                 className="transition-transform duration-200"
@@ -139,7 +212,15 @@ function LandingHeader() {
             >
               <a
                 href={appLink("/companies/new")}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false)
+                  analytics.trackMarketingCtaClicked({
+                    ctaName: "brand_signup",
+                    location: "header_dropdown",
+                    destination: appLink("/companies/new"),
+                    targetUserType: "brand",
+                  })
+                }}
                 className="flex items-center gap-4 px-5 py-4 hover:bg-gray-50 transition-colors"
               >
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(0, 25, 218, 0.08)" }}>
@@ -153,7 +234,15 @@ function LandingHeader() {
               <div className="h-px bg-gray-100 mx-5" />
               <a
                 href={appLink("/creator/register")}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false)
+                  analytics.trackMarketingCtaClicked({
+                    ctaName: "creator_signup",
+                    location: "header_dropdown",
+                    destination: appLink("/creator/register"),
+                    targetUserType: "creator",
+                  })
+                }}
                 className="flex items-center gap-4 px-5 py-4 hover:bg-gray-50 transition-colors"
               >
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(0, 25, 218, 0.08)" }}>
@@ -294,6 +383,14 @@ export default function HomePage() {
             <div className="flex flex-row gap-3">
               <a
                 href={appLink("/companies/new")}
+                onClick={() =>
+                  analytics.trackMarketingCtaClicked({
+                    ctaName: "hero_brand_signup",
+                    location: "hero",
+                    destination: appLink("/companies/new"),
+                    targetUserType: "brand",
+                  })
+                }
                 className="bg-[#0019DA] text-white px-4 py-2 sm:px-8 sm:py-3 rounded-full hover:bg-[#0014B0] transition-colors cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2"
                 style={{ fontSize: "13px", fontWeight: 600 }}
               >
@@ -302,6 +399,14 @@ export default function HomePage() {
               </a>
               <a
                 href={appLink("/creator/register")}
+                onClick={() =>
+                  analytics.trackMarketingCtaClicked({
+                    ctaName: "hero_creator_signup",
+                    location: "hero",
+                    destination: appLink("/creator/register"),
+                    targetUserType: "creator",
+                  })
+                }
                 className="text-[#0019DA] px-4 py-2 sm:px-8 sm:py-3 rounded-full hover:bg-white/80 transition-all cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 backdrop-blur-lg shadow-[0_2px_20px_rgba(0,0,0,0.08),0_1px_4px_rgba(0,0,0,0.04)] hover:shadow-[0_3px_12px_rgba(0,25,218,0.12),0_1px_4px_rgba(0,0,0,0.06)]"
                 style={{ fontSize: "13px", fontWeight: 600, backgroundColor: "rgba(255, 255, 255, 0.6)", border: "1px solid rgba(0, 25, 218, 0.15)" }}
               >
