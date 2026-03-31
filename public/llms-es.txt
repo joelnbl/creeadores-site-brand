@@ -1,0 +1,71 @@
+# Creeadores
+
+> Creeadores es una plataforma marketplace que conecta marcas y agencias con creadores de contenido UGC (User-Generated Content) e influencers en toda Latinoamérica.
+
+## Acerca de
+
+Creeadores ayuda a marcas a encontrar, contratar y gestionar creadores de contenido en una sola plataforma. Simplifica todo el flujo de trabajo: creación de campañas, descubrimiento de creadores, aprobación de contenido y pagos seguros a través de Mercado Pago.
+
+- Sitio web: https://creeadores.com
+- App: https://app.creeadores.com
+- Contacto: contacto@creeadores.com
+- Idiomas: Español, Inglés, Portugués
+
+## Páginas
+
+- [Inicio – Para Marcas](https://creeadores.com/): Landing page para marcas y agencias que buscan contratar creadores de contenido.
+- [Inicio – Para Creadores](https://creeadores.com/creator): Landing page para creadores e influencers que quieren unirse al marketplace.
+- [App](https://app.creeadores.com/): La aplicación principal donde los usuarios gestionan campañas, creadores y pagos.
+
+## Tipos de Campañas
+
+- **Campaña Flex** (Gratis): Las marcas publican un brief y negocian directamente con los creadores. Sin costo inicial.
+- **Campaña de Influencers**: Las marcas contratan influencers para publicar contenido de marca en sus propios perfiles de redes sociales.
+- **Campaña de Creadores UGC**: Las marcas contratan creadores para producir contenido de video profesional (anuncios, testimonios, reseñas, etc.).
+- **Campaña UGC + Influencer**: Una opción híbrida que combina producción de UGC con distribución a través de influencers. La oferta más completa.
+
+## Precios
+
+- **Plan Gratuito**: $0/mes — Hasta 2 creadores por campaña, 10% de comisión por transacción.
+- **Starter**: US$16/mes (o $24.990 ARS) — Hasta 10 creadores, 5% de comisión, soporte prioritario.
+- **Growth** (Más Popular): US$29/mes (o $44.990 ARS) — Hasta 30 creadores, 3% de comisión, analíticas avanzadas.
+- **Scale / Enterprise**: Precio personalizado — Creadores ilimitados, account manager dedicado, integraciones personalizadas.
+
+## Funcionalidades Clave
+
+- **Marketplace de Creadores**: Buscá y filtrá creadores por nicho, ubicación, tamaño de audiencia y estilo de contenido.
+- **Gestión de Campañas**: Creá, gestioná y hacé seguimiento de campañas desde un único panel de control.
+- **Pagos Protegidos**: Transacciones seguras a través de Mercado Pago. Los fondos se liberan solo después de la aprobación del contenido.
+- **Sistema de Reputación**: Los creadores obtienen insignias de Bronce, Plata u Oro según su rendimiento y confiabilidad.
+- **Multi-idioma**: Plataforma completa disponible en Español, Inglés y Portugués.
+- **Panel de Analíticas**: Seguimiento del rendimiento de campañas, ROI y métricas de creadores.
+
+## Regiones
+
+Argentina, México, Chile, Colombia, Venezuela, y en expansión por toda Latinoamérica.
+
+## Redes Sociales
+
+- Instagram: https://instagram.com/creeadores
+- LinkedIn: https://linkedin.com/company/creeadores
+- TikTok: https://tiktok.com/@creeadores
+
+## Preguntas Frecuentes
+
+### ¿Qué es Creeadores?
+Creeadores es una plataforma marketplace que conecta marcas y agencias con creadores de contenido UGC e influencers en Latinoamérica. Ofrece herramientas para gestión de campañas, descubrimiento de creadores y pagos seguros.
+
+### ¿Cuánto cuesta Creeadores?
+Creeadores ofrece un plan Gratuito ($0/mes con máximo 2 creadores), Starter ($16 USD/mes), Growth ($29 USD/mes, el más popular) y Enterprise (precio personalizado). Todos los planes incluyen acceso al marketplace de creadores.
+
+### ¿Qué tipos de campañas puedo crear?
+Podés crear campañas Flex (gratis, negociación directa), campañas de Influencers (contenido de marca en perfiles de influencers), campañas de Creadores UGC (producción de video profesional) y campañas híbridas UGC + Influencer.
+
+### ¿Cómo funcionan los pagos?
+Los pagos se procesan de forma segura a través de Mercado Pago. Los fondos se mantienen en custodia y se liberan a los creadores solo después de que la marca apruebe el contenido entregado.
+
+### ¿En qué países opera Creeadores?
+Creeadores opera en toda Latinoamérica, con fuerte presencia en Argentina, México, Chile, Colombia y Venezuela. La plataforma se está expandiendo a más países.
+
+### ¿En qué idiomas está disponible Creeadores?
+La plataforma está disponible en Español, Inglés y Portugués.

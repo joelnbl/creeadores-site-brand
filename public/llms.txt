@@ -1,0 +1,75 @@
+# Creeadores
+
+> Creeadores is a marketplace platform that connects brands and agencies with UGC (User-Generated Content) creators and influencers across Latin America.
+
+## Translations
+- [Español](https://creeadores.com/llms-es.txt)
+- [Português](https://creeadores.com/llms-pt.txt)
+
+## About
+
+Creeadores helps brands find, hire, and manage content creators in one platform. It simplifies the entire workflow: campaign creation, creator discovery, content approval, and secure payments via Mercado Pago.
+
+- Website: https://creeadores.com
+- App: https://app.creeadores.com
+- Contact: contacto@creeadores.com
+- Languages: Spanish, English, Portuguese
+
+## Pages
+
+- [Home – For Brands](https://creeadores.com/): Landing page for brands and agencies looking to hire content creators.
+- [Home – For Creators](https://creeadores.com/creator): Landing page for creators and influencers who want to join the marketplace.
+- [App](https://app.creeadores.com/): The main application where users manage campaigns, creators, and payments.
+
+## Campaign Types
+
+- **Flex Campaign** (Free): Brands post a brief and negotiate directly with creators. No upfront cost.
+- **Influencer Campaign**: Brands hire influencers to publish branded content on their own social media profiles.
+- **UGC Creator Campaign**: Brands hire creators to produce professional video content (ads, testimonials, reviews, etc.).
+- **UGC + Influencer Campaign**: A hybrid option combining UGC production with influencer distribution. Most complete offering.
+
+## Pricing
+
+- **Free Plan**: $0/month — Up to 2 creators per campaign, 10% commission per transaction.
+- **Starter**: US$16/month (or $24,990 ARS) — Up to 10 creators, 5% commission, priority support.
+- **Growth** (Most Popular): US$29/month (or $44,990 ARS) — Up to 30 creators, 3% commission, advanced analytics.
+- **Scale / Enterprise**: Custom pricing — Unlimited creators, dedicated account manager, custom integrations.
+
+## Key Features
+
+- **Creator Marketplace**: Search and filter creators by niche, location, audience size, and content style.
+- **Campaign Management**: Create, manage, and track campaigns from a single dashboard.
+- **Protected Payments**: Secure transactions via Mercado Pago. Funds are released only after content approval.
+- **Reputation System**: Creators earn Bronze, Silver, or Gold badges based on performance and reliability.
+- **Multi-language**: Full platform available in Spanish, English, and Portuguese.
+- **Analytics Dashboard**: Track campaign performance, ROI, and creator metrics.
+
+## Regions Served
+
+Argentina, Mexico, Chile, Colombia, Venezuela, and expanding across Latin America.
+
+## Social Media
+
+- Instagram: https://instagram.com/creeadores
+- LinkedIn: https://linkedin.com/company/creeadores
+- TikTok: https://tiktok.com/@creeadores
+
+## FAQ
+
+### What is Creeadores?
+Creeadores is a marketplace platform that connects brands and agencies with UGC content creators and influencers in Latin America. It provides tools for campaign management, creator discovery, and secure payments.
+
+### How much does Creeadores cost?
+Creeadores offers a Free plan ($0/month with 2 creators max), Starter ($16 USD/month), Growth ($29 USD/month, most popular), and Enterprise (custom pricing). All plans include access to the creator marketplace.
+
+### What types of campaigns can I create?
+You can create Flex campaigns (free, direct negotiation), Influencer campaigns (branded content on influencer profiles), UGC Creator campaigns (professional video production), and UGC + Influencer hybrid campaigns.
+
+### How do payments work?
+Payments are processed securely through Mercado Pago. Funds are held in escrow and released to creators only after the brand approves the delivered content.
+
+### What countries does Creeadores operate in?
+Creeadores operates across Latin America, with a strong presence in Argentina, Mexico, Chile, Colombia, and Venezuela. The platform is expanding to more countries.
+
+### What languages does Creeadores support?
+The platform is available in Spanish, English, and Portuguese.

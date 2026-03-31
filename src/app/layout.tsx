@@ -59,8 +59,55 @@ const organizationJsonLd = {
     "@type": "ContactPoint",
     contactType: "Customer Service",
     email: "contacto@creeadores.com",
-    availableLanguage: ["Spanish", "English"],
+    availableLanguage: ["Spanish", "English", "Portuguese"],
   },
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "¿Qué es Creeadores?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Creeadores es una plataforma marketplace que conecta marcas y agencias con creadores de contenido UGC (User-Generated Content) e influencers en Latinoamérica. Permite crear campañas, descubrir creadores, gestionar entregables y realizar pagos seguros a través de Mercado Pago.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cuánto cuesta Creeadores?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Creeadores ofrece un plan Gratuito ($0/mes, hasta 2 creadores), Starter (US$16/mes, hasta 10 creadores), Growth (US$29/mes, hasta 30 creadores, el más popular) y Enterprise (precio personalizado, creadores ilimitados). Todos los planes incluyen acceso al marketplace de creadores.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Qué tipos de campañas puedo crear en Creeadores?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Podés crear 4 tipos de campañas: Flex (gratis, negociación directa), Influencer (contenido de marca en perfiles de influencers), UGC Creator (producción de video profesional) y UGC + Influencer (híbrida, la más completa).",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cómo funcionan los pagos en Creeadores?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Los pagos se procesan de forma segura a través de Mercado Pago. Los fondos se mantienen en custodia y se liberan a los creadores solo después de que la marca apruebe el contenido entregado.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿En qué países opera Creeadores?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Creeadores opera en toda Latinoamérica, con fuerte presencia en Argentina, México, Chile, Colombia y Venezuela. La plataforma está disponible en Español, Inglés y Portugués.",
+      },
+    },
+  ],
 };
 
 export const metadata: Metadata = {
@@ -181,6 +228,12 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqJsonLd),
           }}
         />
         {GTM_ID ? (
