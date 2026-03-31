@@ -165,8 +165,6 @@ function LandingHeader() {
         </div>
 
         <div className="flex items-center gap-3">
-          <LanguageMenu variant="light" />
-
           <a
             href={appLink("/users/login")}
             onClick={() =>
@@ -255,6 +253,8 @@ function LandingHeader() {
               </a>
             </div>
           </div>
+
+          <LanguageMenu variant="light" />
         </div>
       </nav>
     </header>

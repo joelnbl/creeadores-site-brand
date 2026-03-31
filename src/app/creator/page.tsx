@@ -61,9 +61,7 @@ function LandingHeader() {
           ))}
         </div>
 
-        <div className="flex items-center gap-5">
-          <LanguageMenu variant="dark" />
-
+        <div className="flex items-center gap-3">
           <a
             href={appLink("/users/login")}
             className="hidden sm:block text-white/70 hover:text-white transition-colors"
@@ -156,6 +154,8 @@ function LandingHeader() {
               </a>
             </div>
           </div>
+
+          <LanguageMenu variant="dark" />
         </div>
       </nav>
     </header>
