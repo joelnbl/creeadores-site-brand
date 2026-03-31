@@ -1,11 +1,25 @@
 "use client"
 
-import { Globe } from "lucide-react"
+import { Globe, Instagram, Linkedin } from "lucide-react"
 import Link from "next/link"
 import { Logo } from "@/components/logo"
 import { useLanguage } from "@/components/language-provider"
 import { resolveLocale, type Locale } from "@/lib/i18n";
 import { useRouter } from "next/navigation";
+
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.3 0 .59.05.86.12V9.01a6.27 6.27 0 0 0-.86-.06 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.75a8.18 8.18 0 0 0 4.76 1.52V6.84a4.84 4.84 0 0 1-1-.15Z" />
+    </svg>
+  )
+}
+
+const socials = [
+  { icon: Instagram, href: "https://www.instagram.com/creeadores/", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/creeadores/", label: "LinkedIn" },
+  { icon: TikTokIcon, href: "https://www.tiktok.com/@creeadores.app", label: "TikTok" },
+]
 
 
 const footerLocales: { value: Locale; label: string }[] = [
@@ -14,7 +28,7 @@ const footerLocales: { value: Locale; label: string }[] = [
   { value: "pt", label: "Português" },
 ]
 
-const legalPaths = ["https://www.creeadores.com/privacy-policy", "https://www.creeadores.com/terms-of-service"]
+const legalPaths = ["https://app.creeadores.com/privacy-policy", "https://app.creeadores.com/terms-of-service"]
 
 export function LandingFooter() {
   const { dictionary, locale, setLocale } = useLanguage()
@@ -60,6 +74,26 @@ export function LandingFooter() {
                 />
               </a>
             ))}
+          </div>
+
+          {/* Social icons */}
+          <div className="flex items-center gap-3">
+            {socials.map((social) => {
+              const Icon = social.icon
+              return (
+                <Link
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
+                  style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid transparent" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.5)" }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = "transparent" }}
+                >
+                  <Icon className="w-4 h-4" />
+                </Link>
+              )
+            })}
           </div>
         </div>
 

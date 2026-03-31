@@ -233,13 +233,13 @@ function LandingHeader() {
               </a>
               <div className="h-px bg-gray-100 mx-5" />
               <a
-                href={appLink("/creator/register")}
+                href="/creator"
                 onClick={() => {
                   setOpen(false)
                   analytics.trackMarketingCtaClicked({
                     ctaName: "creator_signup",
                     location: "header_dropdown",
-                    destination: appLink("/creator/register"),
+                    destination: "/creator",
                     targetUserType: "creator",
                   })
                 }}
@@ -398,12 +398,12 @@ export default function HomePage() {
                 {hero.ctas.secondary}
               </a>
               <a
-                href={appLink("/creator/register")}
+                href="/creator"
                 onClick={() =>
                   analytics.trackMarketingCtaClicked({
                     ctaName: "hero_creator_signup",
                     location: "hero",
-                    destination: appLink("/creator/register"),
+                    destination: "/creator",
                     targetUserType: "creator",
                   })
                 }

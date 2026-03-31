@@ -6,10 +6,10 @@ import { useRouter } from "next/navigation"
 import { resolveLocale, type Locale } from "@/lib/i18n"
 import { useLanguage } from "@/components/language-provider"
 
-const LANGUAGE_OPTIONS: Array<{ value: Locale; label: string; flag: string }> = [
-  { value: "es-AR", label: "Español", flag: "🇪🇸" },
-  { value: "en", label: "English", flag: "🇺🇸" },
-  { value: "pt", label: "Português", flag: "🇧🇷" },
+const LANGUAGE_OPTIONS: Array<{ value: Locale; label: string; short: string; flag: string }> = [
+  { value: "es-AR", label: "Español", short: "ES", flag: "🇪🇸" },
+  { value: "en", label: "English", short: "EN", flag: "🇺🇸" },
+  { value: "pt", label: "Português", short: "PT", flag: "🇧🇷" },
 ]
 
 export function LanguageMenu({ variant = "light" }: { variant?: "light" | "dark" }) {
@@ -48,7 +48,7 @@ export function LanguageMenu({ variant = "light" }: { variant?: "light" | "dark"
         style={{ fontSize: "11px", fontWeight: 600 }}
       >
         <Globe className="h-3 w-3 flex-shrink-0" />
-        <span className="hidden sm:inline">{current.label}</span>
+        <span className="hidden sm:inline">{current.short}</span>
         <ChevronDown
           size={12}
           className="transition-transform duration-200"
