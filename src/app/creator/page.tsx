@@ -38,7 +38,7 @@ function LandingHeader() {
           "0 2px 20px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.08)",
       }}
     >
-      <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-8 lg:px-16 py-4 sm:py-[22px] relative">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-8 lg:px-16 py-[22px] relative">
         <Logo href="/" variant="white" className="h-[22px] flex-shrink-0" />
 
         <div className="hidden min-[1180px]:flex items-center gap-6">
@@ -77,7 +77,8 @@ function LandingHeader() {
               className="bg-white text-[#0019DA] px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-full hover:bg-white/90 transition-colors cursor-pointer flex items-center gap-1.5"
               style={{ fontSize: "12px", fontWeight: 600 }}
             >
-              {nav.startFree}
+              <span className="sm:hidden">{nav.startFreeMobile}</span>
+              <span className="hidden sm:inline">{nav.startFree}</span>
               <ChevronDown
                 size={14}
                 className="transition-transform duration-200"

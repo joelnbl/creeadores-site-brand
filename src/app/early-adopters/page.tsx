@@ -11,7 +11,7 @@ import { CampaignFeatures } from "@/app/creator/components/campaign-features"
 import { Pricing } from "@/app/creator/components/pricing"
 import { LandingFooter } from "@/app/creator/components/landing-footer"
 import RotatingText from "@/components/ui/rotating-text"
-import { HeroCarousel3D } from "@/components/landing/hero-carousel-3d"
+import { HeroLaptopMockup } from "@/components/landing/hero-laptop-mockup"
 
 function LandingHeader() {
   const { dictionary } = useLanguage()
@@ -19,7 +19,7 @@ function LandingHeader() {
 
   return (
     <header className="sticky top-0 z-50 bg-[#0019DA] backdrop-blur-lg" style={{ boxShadow: "0 2px 20px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.08)" }}>
-      <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-8 lg:px-16 py-4 sm:py-[22px] relative">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-8 lg:px-16 py-[22px] relative">
         <Logo href="/" variant="white" className="h-[22px] flex-shrink-0" />
 
         <div className="flex items-center gap-3">
@@ -28,7 +28,8 @@ function LandingHeader() {
             className="bg-white text-[#0019DA] px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-full hover:bg-white/90 transition-colors cursor-pointer flex items-center gap-1.5"
             style={{ fontSize: "12px", fontWeight: 600 }}
           >
-            {nav.startFree}
+            <span className="sm:hidden">{nav.startFreeMobile}</span>
+            <span className="hidden sm:inline">{nav.startFree}</span>
             <ArrowRight size={14} />
           </a>
 
@@ -86,21 +87,21 @@ export default function EarlyAdoptersPage() {
         <div className="absolute inset-0 pointer-events-none z-0" style={{ backgroundImage: "radial-gradient(circle, rgba(0, 25, 218, 0.07) 1.2px, transparent 1.2px)", backgroundSize: "16px 16px" }} />
 
         {/* Hero content — flex row on desktop */}
-        <div className="min-h-[90vh] md:min-h-[calc(75vh-12px)] lg:min-h-[calc(84vh-12px)] max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 relative z-20 flex items-center justify-start">
-          <div className="w-full flex flex-col lg:flex-row items-center lg:items-center gap-10 sm:gap-10 lg:gap-8 py-8 sm:py-12">
+        <div className="min-h-[70vh] md:min-h-[calc(75vh-12px)] lg:min-h-[calc(84vh-12px)] max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 relative z-20 flex items-center justify-start">
+          <div className="w-full flex flex-col lg:flex-row items-center lg:items-center gap-6 sm:gap-10 lg:gap-8 py-6 sm:py-12">
             {/* Left: Text content */}
             <div className="w-full lg:w-1/2 text-center lg:text-left flex flex-col items-center lg:items-start">
               <div
                 className="inline-flex items-center gap-2 sm:gap-2.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-6 backdrop-blur-lg animate-shine"
                 style={{ backgroundColor: "rgba(255, 255, 255, 0.6)", border: "1px solid rgba(0, 25, 218, 0.25)", boxShadow: "0 2px 20px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04)" }}
               >
-                <span className="flex items-center gap-1.5 uppercase text-[12px]" style={{ fontWeight: 700, letterSpacing: "0.06em", color: "#030870" }}>
-                  <Handshake size={13} />
+                <span className="flex items-center gap-1.5 uppercase text-[10px] sm:text-[12px]" style={{ fontWeight: 700, letterSpacing: "0.06em", color: "#030870" }}>
+                  <Handshake size={13} className="hidden sm:block" />
                   {hero.badge}
                 </span>
                 <span className="w-px h-3.5" style={{ backgroundColor: "rgba(0, 25, 218, 0.15)" }} />
-                <div className="flex items-center gap-2.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="46" height="14" viewBox="0 0 60 18" fill="none">
+                <div className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-[36px] sm:w-[46px] h-auto" viewBox="0 0 60 18" fill="none">
                     <g clipPath="url(#clip0_tiktok_ea)">
                       <path d="M11.4664 6.4964C12.5952 7.32678 13.9781 7.81536 15.4717 7.81536V4.85775C15.189 4.85781 14.9071 4.82748 14.6306 4.76719V7.09525C13.1371 7.09525 11.7544 6.60667 10.6253 5.77635V11.812C10.6253 14.8313 8.24675 17.2788 5.31287 17.2788C4.21817 17.2788 3.20069 16.9382 2.35547 16.3541C3.32015 17.3691 4.66547 17.9988 6.15383 17.9988C9.08789 17.9988 11.4665 15.5513 11.4665 12.5319V6.4964H11.4664ZM12.504 3.51253C11.9271 2.86396 11.5484 2.02579 11.4664 1.09916V0.71875H10.6693C10.8699 1.89649 11.5543 2.90269 12.504 3.51253ZM4.21115 14.0372C3.88883 13.6023 3.71465 13.0703 3.71543 12.5233C3.71543 11.1423 4.80335 10.0227 6.14555 10.0227C6.39569 10.0226 6.64433 10.062 6.88271 10.1398V7.11613C6.60413 7.07684 6.32297 7.06016 6.04193 7.06628V9.41979C5.80337 9.34195 5.55461 9.30241 5.30441 9.30266C3.96221 9.30266 2.87435 10.4222 2.87435 11.8033C2.87435 12.7799 3.41813 13.6253 4.21115 14.0372Z" fill="#FF004F"/>
                       <path d="M10.6237 5.77629C11.7529 6.60661 13.1356 7.09519 14.629 7.09519V4.76713C13.7954 4.5844 13.0574 4.13609 12.5025 3.51253C11.5527 2.90263 10.8684 1.89643 10.6678 0.71875H8.57402V12.5318C8.56928 13.9089 7.48322 15.024 6.1439 15.024C5.35466 15.024 4.6535 14.6369 4.20944 14.0372C3.41648 13.6253 2.8727 12.7798 2.8727 11.8034C2.8727 10.4224 3.96056 9.30272 5.30276 9.30272C5.55992 9.30272 5.80778 9.34393 6.04028 9.41985V7.06634C3.15794 7.12762 0.839844 9.55118 0.839844 12.5318C0.839844 14.0198 1.4171 15.3686 2.354 16.3542C3.19922 16.9382 4.2167 17.2788 5.3114 17.2788C8.24534 17.2788 10.6238 14.8312 10.6238 11.812V5.77629H10.6237Z" fill="black"/>
@@ -114,7 +115,7 @@ export default function EarlyAdoptersPage() {
                       <clipPath id="clip0_tiktok_ea"><rect width="60" height="18" fill="white"/></clipPath>
                     </defs>
                   </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="55" height="11" viewBox="0 0 71 14" fill="none">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-[42px] sm:w-[55px] h-auto" viewBox="0 0 71 14" fill="none">
                     <g clipPath="url(#clip0_meta_ea)">
                       <path d="M2.31822 9.07838C2.31822 9.86974 2.4981 10.4773 2.7332 10.8449C3.04145 11.3264 3.50121 11.5303 3.96993 11.5303C4.57449 11.5303 5.12755 11.3855 6.19337 9.962C7.04721 8.82108 8.05332 7.2196 8.73027 6.21562L9.87669 4.51468C10.6731 3.3334 11.5948 2.02022 12.6517 1.13011C13.5145 0.403612 14.4452 0 15.3819 0C16.9545 0 18.4525 0.880017 19.5989 2.5305C20.8535 4.3381 21.4626 6.61491 21.4626 8.9645C21.4626 10.3613 21.1775 11.3876 20.6923 12.1984C20.2236 12.9826 19.31 13.766 17.7733 13.766V11.5303C19.0891 11.5303 19.4175 10.3627 19.4175 9.02648C19.4175 7.1223 18.9578 5.00911 17.9449 3.49917C17.2262 2.42816 16.2947 1.77373 15.27 1.77373C14.1616 1.77373 13.2697 2.58095 12.2673 4.02026C11.7344 4.78496 11.1873 5.71687 10.5731 6.76842L9.89685 7.9252C8.53846 10.251 8.19438 10.7808 7.51518 11.655C6.32473 13.1858 5.30817 13.766 3.96993 13.766C2.38241 13.766 1.37854 13.1022 0.756818 12.1019C0.249287 11.2867 0 10.2171 0 8.99838L2.31822 9.07838Z" fill="#0081FB"/>
                       <path d="M1.82812 2.68834C2.89095 1.10633 4.42474 0 6.18393 0C7.20272 0 8.21555 0.291177 9.27315 1.12507C10.43 2.0368 11.663 3.53809 13.2013 6.01237L13.7529 6.90032C15.0844 9.04234 15.8419 10.1443 16.2853 10.664C16.8555 11.3314 17.2548 11.5303 17.7735 11.5303C19.0894 11.5303 19.4178 10.3627 19.4178 9.02648L21.4628 8.9645C21.4628 10.3613 21.1777 11.3876 20.6926 12.1984C20.2239 12.9826 19.3103 13.766 17.7735 13.766C16.8182 13.766 15.9718 13.5657 15.0359 12.713C14.3164 12.0586 13.4752 10.8961 12.8281 9.85101L10.9032 6.74608C9.93742 5.18785 9.05148 4.02603 8.53872 3.49989C7.98716 2.93411 7.27811 2.25086 6.14661 2.25086C5.23082 2.25086 4.4531 2.87141 3.80227 3.82062L1.82812 2.68834Z" fill="url(#paint0_meta_ea)"/>
@@ -135,8 +136,8 @@ export default function EarlyAdoptersPage() {
               </div>
 
               <h1
-                className="text-[#0019DA] mb-3 sm:mb-6 drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
-                style={{ fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.02em" }}
+                className="text-[#0019DA] mb-2 sm:mb-6 drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
+                style={{ fontSize: "clamp(24px, 6vw, 52px)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.02em" }}
               >
                 <span style={{ letterSpacing: "-0.05em" }}>{hero.line1} {hero.line2}</span><br /><RotatingText
                   texts={hero.rotatingWords}
@@ -148,16 +149,16 @@ export default function EarlyAdoptersPage() {
                 </RotatingText>
               </h1>
 
-              <p className="text-gray-500 mb-4 sm:mb-8 max-w-lg text-[12px] sm:text-[14px]" style={{ fontWeight: 400, lineHeight: 1.7 }}>
+              <p className="text-gray-500 mb-3 sm:mb-8 max-w-lg text-[11px] sm:text-[14px]" style={{ fontWeight: 400, lineHeight: 1.7 }}>
                 {hero.description}
               </p>
 
-              <div className="flex flex-row gap-3">
+              <div className="flex flex-row gap-2 sm:gap-3">
                 <a
                   href={appLink("/creator/register?cohort=early_adopter")}
-                  className="text-[#0019DA] px-5 py-2.5 sm:px-7 sm:py-3 rounded-full transition-all duration-300 cursor-pointer flex items-center justify-center gap-2"
+                  className="text-[#0019DA] px-3.5 py-2 sm:px-7 sm:py-3 rounded-full transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2"
                   style={{
-                    fontSize: "13px",
+                    fontSize: "clamp(11px, 3vw, 13px)",
                     fontWeight: 600,
                     backgroundColor: "white",
                     border: "2px solid rgba(0, 25, 218, 0.2)",
@@ -173,22 +174,22 @@ export default function EarlyAdoptersPage() {
                     e.currentTarget.style.borderColor = "rgba(0, 25, 218, 0.2)";
                   }}
                 >
-                  <UserRound size={15} />
+                  <UserRound size={13} className="sm:w-[15px] sm:h-[15px]" />
                   {hero.ctas.primary}
                 </a>
                 <a
                   href={appLink("/creator/register?cohort=early_adopter")}
-                  className="bg-[#0019DA] text-white px-5 py-2.5 sm:px-7 sm:py-3 rounded-full hover:bg-[#0014B0] transition-colors cursor-pointer flex items-center justify-center gap-2"
-                  style={{ fontSize: "13px", fontWeight: 600 }}
+                  className="bg-[#0019DA] text-white px-3.5 py-2 sm:px-7 sm:py-3 rounded-full hover:bg-[#0014B0] transition-colors cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2"
+                  style={{ fontSize: "clamp(11px, 3vw, 13px)", fontWeight: 600 }}
                 >
-                  <Sparkles size={15} />
+                  <Sparkles size={13} className="sm:w-[15px] sm:h-[15px]" />
                   Crear Contenido
                 </a>
               </div>
             </div>
 
-            {/* Right: 3D Phone Carousel */}
-            <HeroCarousel3D onVideoClick={openVideoModal} />
+            {/* Right: Laptop Mockup with horizontal video */}
+            <HeroLaptopMockup videoSrc="/videos/hero-landing.mp4" onVideoClick={openVideoModal} />
           </div>
         </div>
 
@@ -229,9 +230,9 @@ export default function EarlyAdoptersPage() {
           <div
             className="relative transition-all duration-300 ease-out"
             style={{
-              width: "min(380px, 90vw)",
-              aspectRatio: "9/16",
-              borderRadius: "24px",
+              width: "min(800px, 90vw)",
+              aspectRatio: "16/9",
+              borderRadius: "16px",
               overflow: "hidden",
               boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
               transform: modalVisible ? "scale(1)" : "scale(0.85)",
