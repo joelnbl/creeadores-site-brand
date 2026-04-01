@@ -20,7 +20,7 @@ export function LanguageProvider({
   initialLocale: Locale
 }) {
   const pathname = usePathname()
-  const isCreatorRoute = pathname?.startsWith("/creator") ?? false
+  const isCreatorRoute = (pathname?.startsWith("/creator") || pathname?.startsWith("/early-adopters")) ?? false
   const [locale, setLocaleState] = useState<Locale>(initialLocale)
   const [dictionary, setDictionary] = useState<AppDictionary>(
     isCreatorRoute ? getCreatorDictionary(initialLocale) : getDictionary(initialLocale),

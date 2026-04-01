@@ -40,7 +40,7 @@ const blockAccent = [
   { color: "#059669", bg: "rgba(5, 150, 105, 0.08)", gradientAlpha: "12" },
 ]
 
-export function CampaignFeatures() {
+export function CampaignFeatures({ registerHref }: { registerHref?: string } = {}) {
   const { dictionary } = useLanguage()
   const t = dictionary.home.campaignFeatures
 
@@ -63,7 +63,7 @@ export function CampaignFeatures() {
           </span>
           <h2 style={{ fontSize: "clamp(22px, 3.5vw, 42px)", fontWeight: 700, lineHeight: 1.2, color: "#0A0A1A", whiteSpace: "pre-line", textTransform: "uppercase", letterSpacing: "-0.02em" }}>{t.title}</h2>
           <p className="mt-4 mx-auto max-w-2xl text-gray-500 text-[14px] sm:text-[16px]" style={{ lineHeight: 1.7 }}>{t.description}</p>
-          <a href={appLink("/creator/register")} className="inline-flex items-center gap-2 mt-6 bg-[#0019DA] text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full hover:bg-[#0014B0] transition-colors cursor-pointer" style={{ fontSize: "14px", fontWeight: 600 }}>
+          <a href={registerHref ?? appLink("/creator/register")} className="inline-flex items-center gap-2 mt-6 bg-[#0019DA] text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full hover:bg-[#0014B0] transition-colors cursor-pointer" style={{ fontSize: "14px", fontWeight: 600 }}>
             {t.ctaButton}
             <ArrowRight size={16} />
           </a>

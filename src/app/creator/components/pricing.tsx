@@ -21,7 +21,7 @@ const planStyle: { emoji: string; accent: string; gradient: string; glow: string
   { emoji: "🥇", accent: "#D4A017", gradient: "linear-gradient(135deg, #F59E0B 0%, #B8860B 100%)", glow: "rgba(245, 158, 11, 0.35)" },
 ]
 
-export function Pricing() {
+export function Pricing({ registerHref }: { registerHref?: string } = {}) {
   const { dictionary } = useLanguage()
   const t = dictionary.home.pricing
   const ref = useRef<HTMLDivElement>(null)
@@ -57,13 +57,13 @@ export function Pricing() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 max-w-[960px] mx-auto">
           {t.plans.map((plan, i) => (
-            <PlanCard key={plan.name} plan={plan} index={i} />
+            <PlanCard key={plan.name} plan={plan} index={i} registerHref={registerHref} />
           ))}
         </div>
 
         <div className="flex justify-center mt-12 sm:mt-20">
           <a
-            href={appLink("/creator/register")}
+            href={registerHref ?? appLink("/creator/register")}
             className="relative inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-3.5 rounded-full bg-[#0019DA] text-white text-[13px] sm:text-[15px] font-semibold transition-colors hover:bg-[#0014B0] cursor-pointer overflow-hidden"
             style={{ border: "1px solid rgba(255,255,255,0.25)", boxShadow: "0 0 0 1px rgba(0,25,218,0.5), 0 4px 16px rgba(0,25,218,0.3)" }}
           >
@@ -76,7 +76,7 @@ export function Pricing() {
   )
 }
 
-function PlanCard({ plan, index }: { plan: PricingPlan; index: number }) {
+function PlanCard({ plan, index, registerHref }: { plan: PricingPlan; index: number; registerHref?: string }) {
   const style = planStyle[index % planStyle.length]
   const cardRef = useRef<HTMLDivElement>(null)
 
@@ -206,7 +206,7 @@ function PlanCard({ plan, index }: { plan: PricingPlan; index: number }) {
         </ul>
 
         <a
-          href={appLink("/creator/register")}
+          href={registerHref ?? appLink("/creator/register")}
           className="w-full py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer hover:opacity-90 relative z-10"
           style={{
             background: style.gradient,

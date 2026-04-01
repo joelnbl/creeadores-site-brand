@@ -30,7 +30,7 @@ const footerLocales: { value: Locale; label: string }[] = [
 
 const legalPaths = ["https://app.creeadores.com/privacy-policy", "https://app.creeadores.com/terms-of-service"]
 
-export function LandingFooter() {
+export function LandingFooter({ hideNavLinks = false }: { hideNavLinks?: boolean } = {}) {
   const { dictionary, locale, setLocale } = useLanguage()
   const router = useRouter();
   
@@ -59,22 +59,24 @@ export function LandingFooter() {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-            {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="group relative text-white/60 hover:text-white transition-colors pb-1 text-[12px] sm:text-[13px]"
-                style={{ fontWeight: 500 }}
-              >
-                {link.label}
-                <span
-                  className="absolute bottom-0 left-1/2 h-[2px] w-0 group-hover:w-full group-hover:left-0 transition-all duration-300 rounded-full"
-                  style={{ background: "linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4))" }}
-                />
-              </a>
-            ))}
-          </div>
+          {!hideNavLinks && (
+            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+              {links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="group relative text-white/60 hover:text-white transition-colors pb-1 text-[12px] sm:text-[13px]"
+                  style={{ fontWeight: 500 }}
+                >
+                  {link.label}
+                  <span
+                    className="absolute bottom-0 left-1/2 h-[2px] w-0 group-hover:w-full group-hover:left-0 transition-all duration-300 rounded-full"
+                    style={{ background: "linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4))" }}
+                  />
+                </a>
+              ))}
+            </div>
+          )}
 
           {/* Social icons */}
           <div className="flex items-center gap-3">
