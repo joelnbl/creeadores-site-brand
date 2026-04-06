@@ -596,7 +596,7 @@ const portuguese: AppDictionary = {
           iconName: "sliders",
           title: "Crie sua campanha",
           subtitle: "Configure cada detalhe da sua campanha antes de conectar com criadores.",
-          image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80",
+          image: "/campaign-create.jpg",
           cards: [
             { iconName: "clapperboard", title: "Conteúdo sob medida", description: "Defina entregáveis, formato, duração e requisitos de publicação. Carregue briefs, roteiros e assets da marca — tudo em um só lugar." },
             { iconName: "mappin", title: "Logística e presencialidade", description: "Crie campanhas presenciais com localização e gerencie o envio e devolução de produtos." },
@@ -605,13 +605,14 @@ const portuguese: AppDictionary = {
           floatingCards: [
             { iconName: "clapperboard", iconBg: "#0019DA", text: "Reel · 30s", subtext: "Formato definido", position: "-top-8 -right-14" },
             { iconName: "package", iconBg: "#F97316", text: "Produto enviado", subtext: "Tracking ativo", position: "-bottom-8 -left-14" },
+            { iconName: "calendar", iconBg: "#E11D48", text: "Entrega do conteúdo", subtext: "21-fev", position: "-bottom-8 -right-14" },
           ],
         },
         {
           iconName: "users",
           title: "Conecte e negocie com criadores",
           subtitle: "Gerencie todo o ciclo de colaboração com seus criadores pela plataforma.",
-          image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+          image: "/campaign-dashboard.jpg",
           cards: [
             { iconName: "send", title: "Propostas e negociação", description: "Envie propostas personalizadas, receba contrapropostas e negocie os termos diretamente na plataforma." },
             { iconName: "lock", title: "Pagamentos e aprovação", description: "Pagamentos protegidos com controle total — revise, aprove ou solicite ajustes antes de liberar cada pagamento." },
@@ -619,7 +620,8 @@ const portuguese: AppDictionary = {
           ],
           floatingCards: [
             { iconName: "send", iconBg: "#7C3AED", text: "Proposta enviada", subtext: "Há 2 min", position: "-top-8 -right-14" },
-            { iconName: "lock", iconBg: "#059669", text: "Pagamento protegido", subtext: "US$450.00", position: "-bottom-8 -left-14" },
+            { iconName: "lock", iconBg: "#22C55E", customIcon: "campaign-status", text: "Em Progresso", subtext: "Status da campanha", position: "-bottom-8 -left-14" },
+            { iconName: "wallet", iconBg: "#00AEEF", customIcon: "mercadopago", text: "Mercado Pago", subtext: "Pagamento protegido", position: "-bottom-8 -right-14" },
           ],
         },
       ],

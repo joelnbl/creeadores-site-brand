@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import { useRef } from "react"
 
 interface HeroLaptopMockupProps {
   videoSrc: string
@@ -10,12 +10,6 @@ interface HeroLaptopMockupProps {
 export function HeroLaptopMockup({ videoSrc, onVideoClick }: HeroLaptopMockupProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      videoRef.current?.play().catch(() => {})
-    }, 300)
-    return () => clearTimeout(timer)
-  }, [])
 
   return (
     <div className="w-full lg:w-1/2 flex flex-col items-center relative">

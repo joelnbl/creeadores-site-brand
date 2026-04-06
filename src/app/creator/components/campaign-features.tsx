@@ -80,7 +80,7 @@ export function CampaignFeatures({ registerHref }: { registerHref?: string } = {
 }
 
 function MercadoPagoIcon() {
-  return <img src="/mercadopago.svg" alt="Mercado Pago" className="w-7 h-7 object-contain" />
+  return <img src="/mercadopago.png" alt="Mercado Pago" className="w-7 h-7 object-contain" />
 }
 
 function CampaignStatusIcon({ size = 24 }: { size?: number }) {

@@ -243,7 +243,6 @@ export default function EarlyAdoptersPage() {
             <video
               ref={modalVideoRef}
               src={modalVideoSrc}
-              autoPlay
               loop
               playsInline
               controls
