@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useLayoutEffect } from "react"
 import { ArrowRight, Handshake, Sparkles } from "lucide-react"
 import { Logo } from "@/components/logo"
 import { useLanguage } from "@/components/language-provider"
@@ -45,8 +45,8 @@ export default function EarlyAdoptersPage() {
   const [modalVisible, setModalVisible] = useState(false)
   const [modalVideoSrc, setModalVideoSrc] = useState("/videos/hero-reel-3.mp4")
 
-  // Force Spanish (es-AR) as default language for /early-adopters
-  useEffect(() => {
+  // Force Spanish (es-AR) before first paint to avoid flash
+  useLayoutEffect(() => {
     setLocale("es-AR")
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -183,7 +183,7 @@ export default function EarlyAdoptersPage() {
       {/* Pricing / Reputation */}
       <Pricing registerHref={appLink("/creator/register?cohort=early_adopter")} />
       {/* Footer */}
-      <LandingFooter hideNavLinks />
+      <LandingFooter hideNavLinks hideLanguageSelector />
 
       {/* Video Modal */}
       {showVideoModal && (
