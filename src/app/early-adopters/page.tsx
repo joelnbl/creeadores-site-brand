@@ -1,9 +1,8 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { ArrowRight, Handshake, Sparkles, UserRound } from "lucide-react"
+import { ArrowRight, Handshake, Sparkles } from "lucide-react"
 import { Logo } from "@/components/logo"
-import { LanguageMenu } from "@/components/language-menu"
 import { useLanguage } from "@/components/language-provider"
 import { appLink } from "@/lib/links"
 import { CampaignTypes } from "@/app/creator/components/campaign-types"
@@ -25,15 +24,13 @@ function LandingHeader() {
         <div className="flex items-center gap-3">
           <a
             href={appLink("/creator/register?cohort=early_adopter")}
-            className="bg-white text-[#0019DA] px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-full hover:bg-white/90 transition-colors cursor-pointer flex items-center gap-1.5"
-            style={{ fontSize: "12px", fontWeight: 600 }}
+            className="bg-white text-[#0019DA] px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full hover:bg-white/90 transition-colors cursor-pointer flex items-center gap-1.5"
+            style={{ fontSize: "12.5px", fontWeight: 600 }}
           >
             <span className="sm:hidden">{nav.startFreeMobile}</span>
             <span className="hidden sm:inline">{nav.startFree}</span>
-            <ArrowRight size={14} />
+            <ArrowRight size={16} />
           </a>
-
-          <LanguageMenu variant="dark" />
         </div>
       </nav>
     </header>
@@ -41,12 +38,17 @@ function LandingHeader() {
 }
 
 export default function EarlyAdoptersPage() {
-  const { dictionary } = useLanguage()
+  const { dictionary, setLocale } = useLanguage()
   const { hero } = dictionary.home
   const modalVideoRef = useRef<HTMLVideoElement>(null)
   const [showVideoModal, setShowVideoModal] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
   const [modalVideoSrc, setModalVideoSrc] = useState("/videos/hero-reel-3.mp4")
+
+  // Force Spanish (es-AR) as default language for /early-adopters
+  useEffect(() => {
+    setLocale("es-AR")
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const openVideoModal = (videoSrc: string) => {
     setModalVideoSrc(videoSrc)
@@ -153,39 +155,14 @@ export default function EarlyAdoptersPage() {
                 {hero.description}
               </p>
 
-              <div className="flex flex-row gap-2 sm:gap-3">
-                <a
-                  href={appLink("/creator/register?cohort=early_adopter")}
-                  className="text-[#0019DA] px-3.5 py-2 sm:px-7 sm:py-3 rounded-full transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2"
-                  style={{
-                    fontSize: "clamp(11px, 3vw, 13px)",
-                    fontWeight: 600,
-                    backgroundColor: "white",
-                    border: "2px solid rgba(0, 25, 218, 0.2)",
-                    boxShadow: "0 2px 12px rgba(0, 25, 218, 0.08)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background =
-                      "linear-gradient(135deg, rgba(0,25,218,0.06) 0%, rgba(75,60,255,0.10) 100%)";
-                    e.currentTarget.style.borderColor = "rgba(0, 25, 218, 0.35)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "white";
-                    e.currentTarget.style.borderColor = "rgba(0, 25, 218, 0.2)";
-                  }}
-                >
-                  <UserRound size={13} className="sm:w-[15px] sm:h-[15px]" />
-                  {hero.ctas.primary}
-                </a>
-                <a
-                  href={appLink("/creator/register?cohort=early_adopter")}
-                  className="bg-[#0019DA] text-white px-3.5 py-2 sm:px-7 sm:py-3 rounded-full hover:bg-[#0014B0] transition-colors cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2"
-                  style={{ fontSize: "clamp(11px, 3vw, 13px)", fontWeight: 600 }}
-                >
-                  <Sparkles size={13} className="sm:w-[15px] sm:h-[15px]" />
-                  Crear Contenido
-                </a>
-              </div>
+              <a
+                href={appLink("/creator/register?cohort=early_adopter")}
+                className="bg-[#0019DA] text-white px-6 py-3 sm:px-10 sm:py-4 rounded-full hover:bg-[#0014B0] transition-colors cursor-pointer inline-flex items-center justify-center gap-2 border-2 border-black/20"
+                style={{ fontSize: "clamp(13px, 3.5vw, 16px)", fontWeight: 700, letterSpacing: "0.04em" }}
+              >
+                <Sparkles size={18} className="sm:w-[20px] sm:h-[20px]" />
+                CREAR MI PERFIL
+              </a>
             </div>
 
             {/* Right: Laptop Mockup with horizontal video */}
