@@ -42,8 +42,8 @@ const socials = [
 ];
 
 const legalPaths = [
-  "https://app.creeadores.com/privacy-policy",
-  "https://app.creeadores.com/terms-of-service",
+  "/privacy-policy",
+  "/terms-of-service",
 ];
 
 function resolveFooterHref(href: string) {

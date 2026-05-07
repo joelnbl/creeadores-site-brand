@@ -28,7 +28,7 @@ const footerLocales: { value: Locale; label: string }[] = [
   { value: "pt", label: "Português" },
 ]
 
-const legalPaths = ["https://app.creeadores.com/privacy-policy", "https://app.creeadores.com/terms-of-service"]
+const legalPaths = ["/privacy-policy", "/terms-of-service"]
 
 export function LandingFooter({ hideNavLinks = false, hideLanguageSelector = false }: { hideNavLinks?: boolean; hideLanguageSelector?: boolean } = {}) {
   const { dictionary, locale, setLocale } = useLanguage()
