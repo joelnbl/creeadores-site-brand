@@ -272,9 +272,9 @@ const english: AppDictionary = {
       items: [
         {
           iconName: "zap",
-          title: "Flex",
+          title: "Flash",
           badge: "FREE PLAN",
-          description: "Find creators based on your needs, review their profiles and send them a proposal through a Flex campaign.",
+          description: "Find creators based on your needs, review their profiles and send them a proposal through a Flash campaign.",
           bullets: ["Communicate directly via chat", "Total flexibility throughout the campaign"],
         },
         {
@@ -341,10 +341,10 @@ const english: AppDictionary = {
       title: "Start creating content\nthat connects!",
       description: "Select the plan that best suits your needs and start connecting with the best creators.",
       plans: [
-        { name: "Free", description: "Free, no subscription", price: "$0", period: "", features: [{ iconName: "users", text: "2 creators max" }, { iconName: "megaphone", text: "Flex campaign" }, { iconName: "percent", text: "10% commission per creator" }], cta: "Start free", popular: false, iconName: "check" },
-        { name: "Starter", description: "For brands just starting", price: "US$16", arsPrice: "$24.990", period: "/month", features: [{ iconName: "users", text: "10 creators max" }, { iconName: "megaphone", text: "2 campaigns + Flex campaign" }, { iconName: "percent", text: "5% commission per creator" }], cta: "Start now", popular: false, iconName: "rocket" },
-        { name: "Growth", description: "For growing brands", price: "US$29", arsPrice: "$44.990", period: "/month", features: [{ iconName: "users", text: "30 creators max" }, { iconName: "megaphone", text: "Unlimited campaigns + Flex campaign" }, { iconName: "percent", text: "3% commission per creator" }], cta: "Start now", popular: true, iconName: "trending", popularLabel: "MOST POPULAR" },
-        { name: "Scale / Enterprise", description: "Custom solution for large brands", price: null, period: "", features: [{ iconName: "users", text: "Unlimited creators" }, { iconName: "megaphone", text: "Unlimited campaigns + Flex campaign" }, { iconName: "percent", text: "Negotiable commission per creator" }], cta: "Contact", popular: false, iconName: "building", customPriceLabel: "Custom price" },
+        { name: "Free", description: "Free, no subscription", price: "$0", period: "", features: [{ iconName: "users", text: "2 creators max" }, { iconName: "megaphone", text: "Flash campaign" }, { iconName: "percent", text: "10% commission per creator" }], cta: "Start free", popular: false, iconName: "check" },
+        { name: "Starter", description: "For brands just starting", price: "US$16", arsPrice: "$24.990", period: "/month", features: [{ iconName: "users", text: "10 creators max" }, { iconName: "megaphone", text: "2 campaigns + Flash campaign" }, { iconName: "repeat", text: "1 Barter campaign" }, { iconName: "percent", text: "5% commission per creator" }], cta: "Start now", popular: false, iconName: "rocket" },
+        { name: "Growth", description: "For growing brands", price: "US$29", arsPrice: "$44.990", period: "/month", features: [{ iconName: "users", text: "30 creators max" }, { iconName: "megaphone", text: "Unlimited campaigns + Flash campaign" }, { iconName: "repeat", text: "4 Barter campaigns" }, { iconName: "percent", text: "3% commission per creator" }], cta: "Start now", popular: true, iconName: "trending", popularLabel: "MOST POPULAR" },
+        { name: "Scale / Enterprise", description: "Custom solution for large brands", price: null, period: "", features: [{ iconName: "users", text: "Unlimited creators" }, { iconName: "megaphone", text: "Unlimited campaigns + Flash campaign" }, { iconName: "repeat", text: "Unlimited Barter campaigns" }, { iconName: "percent", text: "Negotiable commission per creator" }], cta: "Contact", popular: false, iconName: "building", customPriceLabel: "Custom price" },
       ],
     },
     landingFooter: {
@@ -417,9 +417,9 @@ const spanish: AppDictionary = {
       items: [
         {
           iconName: "zap",
-          title: "Flex",
+          title: "Flash",
           badge: "PLAN FREE",
-          description: "Buscá creadores de contenido según tus necesidades, revisá sus perfiles y enviales una propuesta a través de una campaña Flex.",
+          description: "Buscá creadores de contenido según tus necesidades, revisá sus perfiles y enviales una propuesta a través de una campaña Flash.",
           bullets: ["Comunicación directa por chat", "Flexibilidad total en la campaña"],
         },
         {
@@ -486,10 +486,10 @@ const spanish: AppDictionary = {
       title: "¡Comenzá a crear contenido\nque conecta!",
       description: "Seleccioná el plan que mejor se adapte a tus necesidades y comenzá a conectar con los mejores creadores.",
       plans: [
-        { name: "Free", description: "Free sin suscripción", price: "$0", period: "", features: [{ iconName: "users", text: "2 creadores máximo" }, { iconName: "megaphone", text: "Campaña Flex" }, { iconName: "percent", text: "Comisión del 10% por creador" }], cta: "Empezar gratis", popular: false, iconName: "check" },
-        { name: "Starter", description: "Para marcas que están empezando", price: "US$16", arsPrice: "$24.990", period: "/mes", features: [{ iconName: "users", text: "10 creadores máximo" }, { iconName: "megaphone", text: "2 campañas + Campaña Flex" }, { iconName: "percent", text: "Comisión del 5% por creador" }], cta: "Comenzar ahora", popular: false, iconName: "rocket" },
-        { name: "Growth", description: "Para marcas en crecimiento", price: "US$29", arsPrice: "$44.990", period: "/mes", features: [{ iconName: "users", text: "30 creadores máximo" }, { iconName: "megaphone", text: "Campañas ilimitadas + Campaña Flex" }, { iconName: "percent", text: "Comisión del 3% por creador" }], cta: "Comenzar ahora", popular: true, iconName: "trending", popularLabel: "MÁS POPULAR" },
-        { name: "Scale / Enterprise", description: "Solución personalizada para grandes marcas", price: null, period: "", features: [{ iconName: "users", text: "Creadores ilimitados" }, { iconName: "megaphone", text: "Campañas ilimitadas + Campaña Flex" }, { iconName: "percent", text: "Comisión negociable por creador" }], cta: "Contactar", popular: false, iconName: "building", customPriceLabel: "Precio a medida" },
+        { name: "Free", description: "Free sin suscripción", price: "$0", period: "", features: [{ iconName: "users", text: "2 creadores máximo" }, { iconName: "megaphone", text: "Campaña Flash" }, { iconName: "percent", text: "Comisión del 10% por creador" }], cta: "Empezar gratis", popular: false, iconName: "check" },
+        { name: "Starter", description: "Para marcas que están empezando", price: "US$16", arsPrice: "$24.990", period: "/mes", features: [{ iconName: "users", text: "10 creadores máximo" }, { iconName: "megaphone", text: "2 campañas + Campaña Flash" }, { iconName: "repeat", text: "1 Campaña con Canje" }, { iconName: "percent", text: "Comisión del 5% por creador" }], cta: "Comenzar ahora", popular: false, iconName: "rocket" },
+        { name: "Growth", description: "Para marcas en crecimiento", price: "US$29", arsPrice: "$44.990", period: "/mes", features: [{ iconName: "users", text: "30 creadores máximo" }, { iconName: "megaphone", text: "Campañas ilimitadas + Campaña Flash" }, { iconName: "repeat", text: "4 Campañas con Canje" }, { iconName: "percent", text: "Comisión del 3% por creador" }], cta: "Comenzar ahora", popular: true, iconName: "trending", popularLabel: "MÁS POPULAR" },
+        { name: "Scale / Enterprise", description: "Solución personalizada para grandes marcas", price: null, period: "", features: [{ iconName: "users", text: "Creadores ilimitados" }, { iconName: "megaphone", text: "Campañas ilimitadas + Campaña Flash" }, { iconName: "repeat", text: "Campañas con Canje ilimitadas" }, { iconName: "percent", text: "Comisión negociable por creador" }], cta: "Contactar", popular: false, iconName: "building", customPriceLabel: "Precio a medida" },
       ],
     },
     landingFooter: {
@@ -562,9 +562,9 @@ const portuguese: AppDictionary = {
       items: [
         {
           iconName: "zap",
-          title: "Flex",
+          title: "Flash",
           badge: "PLANO FREE",
-          description: "Encontre criadores de conteúdo conforme suas necessidades, revise seus perfis e envie uma proposta através de uma campanha Flex.",
+          description: "Encontre criadores de conteúdo conforme suas necessidades, revise seus perfis e envie uma proposta através de uma campanha Flash.",
           bullets: ["Comunicação direta por chat", "Flexibilidade total na campanha"],
         },
         {
@@ -631,10 +631,10 @@ const portuguese: AppDictionary = {
       title: "Comece a criar conteúdo\nque conecta!",
       description: "Selecione o plano que melhor se adapta às suas necessidades e comece a se conectar com os melhores criadores.",
       plans: [
-        { name: "Free", description: "Free sem assinatura", price: "$0", period: "", features: [{ iconName: "users", text: "2 criadores máximo" }, { iconName: "megaphone", text: "Campanha Flex" }, { iconName: "percent", text: "Comissão de 10% por criador" }], cta: "Começar grátis", popular: false, iconName: "check" },
-        { name: "Starter", description: "Para marcas que estão começando", price: "US$16", arsPrice: "$24.990", period: "/mês", features: [{ iconName: "users", text: "10 criadores máximo" }, { iconName: "megaphone", text: "2 campanhas + Campanha Flex" }, { iconName: "percent", text: "Comissão de 5% por criador" }], cta: "Começar agora", popular: false, iconName: "rocket" },
-        { name: "Growth", description: "Para marcas em crescimento", price: "US$29", arsPrice: "$44.990", period: "/mês", features: [{ iconName: "users", text: "30 criadores máximo" }, { iconName: "megaphone", text: "Campanhas ilimitadas + Campanha Flex" }, { iconName: "percent", text: "Comissão de 3% por criador" }], cta: "Começar agora", popular: true, iconName: "trending", popularLabel: "MAIS POPULAR" },
-        { name: "Scale / Enterprise", description: "Solução personalizada para grandes marcas", price: null, period: "", features: [{ iconName: "users", text: "Criadores ilimitados" }, { iconName: "megaphone", text: "Campanhas ilimitadas + Campanha Flex" }, { iconName: "percent", text: "Comissão negociável por criador" }], cta: "Contatar", popular: false, iconName: "building", customPriceLabel: "Preço sob medida" },
+        { name: "Free", description: "Free sem assinatura", price: "$0", period: "", features: [{ iconName: "users", text: "2 criadores máximo" }, { iconName: "megaphone", text: "Campanha Flash" }, { iconName: "percent", text: "Comissão de 10% por criador" }], cta: "Começar grátis", popular: false, iconName: "check" },
+        { name: "Starter", description: "Para marcas que estão começando", price: "US$16", arsPrice: "$24.990", period: "/mês", features: [{ iconName: "users", text: "10 criadores máximo" }, { iconName: "megaphone", text: "2 campanhas + Campanha Flash" }, { iconName: "repeat", text: "1 Campanha com Troca" }, { iconName: "percent", text: "Comissão de 5% por criador" }], cta: "Começar agora", popular: false, iconName: "rocket" },
+        { name: "Growth", description: "Para marcas em crescimento", price: "US$29", arsPrice: "$44.990", period: "/mês", features: [{ iconName: "users", text: "30 criadores máximo" }, { iconName: "megaphone", text: "Campanhas ilimitadas + Campanha Flash" }, { iconName: "repeat", text: "4 Campanhas com Troca" }, { iconName: "percent", text: "Comissão de 3% por criador" }], cta: "Começar agora", popular: true, iconName: "trending", popularLabel: "MAIS POPULAR" },
+        { name: "Scale / Enterprise", description: "Solução personalizada para grandes marcas", price: null, period: "", features: [{ iconName: "users", text: "Criadores ilimitados" }, { iconName: "megaphone", text: "Campanhas ilimitadas + Campanha Flash" }, { iconName: "repeat", text: "Campanhas com Troca ilimitadas" }, { iconName: "percent", text: "Comissão negociável por criador" }], cta: "Contatar", popular: false, iconName: "building", customPriceLabel: "Preço sob medida" },
       ],
     },
     landingFooter: {
@@ -695,7 +695,7 @@ const creatorHomeOverridesByLocale = {
       items: [
         {
           iconName: "zap",
-          title: "Flex Campaign",
+          title: "Flash Campaign",
           description: "Brands find you based on your profile. Negotiate directly and agree on the terms that work best for you.",
           bullets: ["Negotiate your own terms", "Direct communication with the brand"],
         },
@@ -815,7 +815,7 @@ const creatorHomeOverridesByLocale = {
       items: [
         {
           iconName: "zap",
-          title: "Campaña Flex",
+          title: "Campaña Flash",
           description: "Las marcas te encuentran según tu perfil. Negociá directamente y acordá los términos que te convengan.",
           bullets: ["Negociá tus propios términos", "Comunicación directa con la marca"],
         },
@@ -935,7 +935,7 @@ const creatorHomeOverridesByLocale = {
       items: [
         {
           iconName: "zap",
-          title: "Campaña Flex",
+          title: "Campaña Flash",
           description: "Las marcas te encuentran según tu perfil. Negociá directamente y acordá los términos que te convengan.",
           bullets: ["Negociá tus propios términos", "Comunicación directa con la marca"],
         },
@@ -1055,7 +1055,7 @@ const creatorHomeOverridesByLocale = {
       items: [
         {
           iconName: "zap",
-          title: "Campanha Flex",
+          title: "Campanha Flash",
           description: "As marcas encontram você pelo seu perfil. Negocie diretamente e combine os termos que fazem sentido para você.",
           bullets: ["Negocie seus próprios termos", "Comunicação direta com a marca"],
         },

@@ -88,7 +88,7 @@ const faqJsonLd = {
       name: "¿Qué tipos de campañas puedo crear en Creeadores?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Podés crear 4 tipos de campañas: Flex (gratis, negociación directa), Influencer (contenido de marca en perfiles de influencers), UGC Creator (producción de video profesional) y UGC + Influencer (híbrida, la más completa).",
+        text: "Podés crear 4 tipos de campañas: Flash (gratis, negociación directa), Influencer (contenido de marca en perfiles de influencers), UGC Creator (producción de video profesional) y UGC + Influencer (híbrida, la más completa).",
       },
     },
     {

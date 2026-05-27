@@ -7,7 +7,7 @@ import { LanguageMenu } from "@/components/language-menu"
 import { useLanguage } from "@/components/language-provider"
 import { analytics } from "@/lib/analytics"
 import { appLink } from "@/lib/links"
-import { CreatorCard } from "@/components/landing/creator-card"
+import { PhoneMockup, MobileVideoCard, videoColumns, allEntries } from "@/components/landing/brand-hero-carousel"
 import { VerticalMarquee } from "@/components/landing/vertical-marquee"
 import { CampaignTypes } from "@/components/landing/campaign-types"
 import { CampaignFeatures } from "@/components/landing/campaign-features"
@@ -15,58 +15,6 @@ import { Pricing } from "@/components/landing/pricing"
 import { LandingFooter } from "@/components/landing/landing-footer"
 import RotatingText from "@/components/ui/rotating-text"
 
-const col1 = [
-  { name: "Valentina Rojas", category: "Buenos Aires, ARG", followers: "12k", rating: 4, badge: "bronce" as const, price: "25.000", image: "https://images.unsplash.com/photo-1642368523880-3824bb4b16f8?w=400&h=500&fit=crop&crop=face" },
-  { name: "Carlos Mendez", category: "Córdoba, ARG", followers: "5.2k", rating: 3, badge: "bronce" as const, price: "18.500", image: "https://images.unsplash.com/photo-1639422633786-bae289799873?w=400&h=500&fit=crop&crop=face" },
-  { name: "Camila Torres", category: "CDMX, MX", followers: "23k", rating: 5, badge: "oro" as const, price: "45.000", image: "https://images.unsplash.com/photo-1672794776762-18dddc72982e?w=400&h=500&fit=crop&crop=face" },
-  { name: "Ricardo Peña", category: "Rosario, ARG", followers: "8.7k", rating: 4, badge: "plata" as const, price: "22.000", image: "https://images.unsplash.com/photo-1542357411977-726a8931ee8b?w=400&h=500&fit=crop&crop=face" },
-  { name: "Lucia Fernandez", category: "Mendoza, ARG", followers: "18k", rating: 5, badge: "oro" as const, price: "38.000", image: "https://images.unsplash.com/photo-1619095383688-b9fd80f2b916?w=400&h=500&fit=crop&crop=face" },
-  { name: "Sebastian Diaz", category: "Santiago, CL", followers: "3.4k", rating: 3, badge: "bronce" as const, price: "16.500", image: "https://images.unsplash.com/photo-1723145600790-60d58244c829?w=400&h=500&fit=crop&crop=face" },
-]
-
-const col2 = [
-  { name: "Sofia Martinez", category: "Buenos Aires, ARG", followers: "31k", rating: 5, badge: "oro" as const, price: "62.000", image: "https://images.unsplash.com/photo-1749318104909-ee768bac4d7e?w=400&h=500&fit=crop&crop=face" },
-  { name: "Mateo Rivera", category: "Caracas, VE", followers: "6.1k", rating: 4, badge: "bronce" as const, price: "19.000", image: "https://images.unsplash.com/photo-1759415491301-3cd2da948c17?w=400&h=500&fit=crop&crop=face" },
-  { name: "Diego Salazar", category: "Tucumán, ARG", followers: "14k", rating: 4, badge: "plata" as const, price: "28.000", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face" },
-  { name: "Mariana Castillo", category: "Mar del Plata, ARG", followers: "21k", rating: 5, badge: "oro" as const, price: "48.000", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop&crop=face" },
-  { name: "Tomas Gutierrez", category: "Monterrey, MX", followers: "2.8k", rating: 3, badge: "bronce" as const, price: "15.500", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&h=500&fit=crop&crop=face" },
-  { name: "Gabriela Rios", category: "La Plata, ARG", followers: "15k", rating: 4, badge: "plata" as const, price: "32.000", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face" },
-]
-
-const col3 = [
-  { name: "Ana Garcia", category: "CDMX, MX", followers: "19k", rating: 5, badge: "plata" as const, price: "35.000", image: "https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=400&h=500&fit=crop&crop=face" },
-  { name: "Marco Alvarez", category: "Guadalajara, MX", followers: "11k", rating: 4, badge: "bronce" as const, price: "30.000", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&crop=face" },
-  { name: "Isabella Lopez", category: "Buenos Aires, ARG", followers: "4.3k", rating: 3, badge: "bronce" as const, price: "17.000", image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=500&fit=crop&crop=face" },
-  { name: "Nicolas Varela", category: "Córdoba, ARG", followers: "9.5k", rating: 4, badge: "plata" as const, price: "26.000", image: "https://images.unsplash.com/photo-1639422633773-041d9fa609af?w=400&h=500&fit=crop&crop=face" },
-  { name: "Catalina Mora", category: "Maracaibo, VE", followers: "27k", rating: 5, badge: "oro" as const, price: "52.000", image: "https://images.unsplash.com/photo-1618835962148-cf177563c6c0?w=400&h=500&fit=crop&crop=face" },
-  { name: "Emilio Suarez", category: "Neuquén, ARG", followers: "3.1k", rating: 3, badge: "bronce" as const, price: "15.800", image: "https://images.unsplash.com/photo-1649440100794-0776df1177b0?w=400&h=500&fit=crop&crop=face" },
-]
-
-const col4 = [
-  { name: "Laura Herrera", category: "Buenos Aires, ARG", followers: "10k", rating: 3, badge: "plata" as const, price: "24.000", image: "https://images.unsplash.com/photo-1669502299593-5dbb23edfdb4?w=400&h=500&fit=crop&crop=face" },
-  { name: "Mateo Ruiz", category: "Rosario, ARG", followers: "7.2k", rating: 4, badge: "bronce" as const, price: "20.000", image: "https://images.unsplash.com/photo-1717700921740-a1440f3b89a4?w=400&h=500&fit=crop&crop=face" },
-  { name: "Andres Moreno", category: "Valparaíso, CL", followers: "9.1k", rating: 5, badge: "oro" as const, price: "27.500", image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=500&fit=crop&crop=face" },
-  { name: "Daniela Ortiz", category: "Mendoza, ARG", followers: "16k", rating: 4, badge: "plata" as const, price: "33.000", image: "https://images.unsplash.com/photo-1756418940569-fce82e2223f3?w=400&h=500&fit=crop&crop=face" },
-  { name: "Felipe Castro", category: "CDMX, MX", followers: "4.8k", rating: 3, badge: "bronce" as const, price: "16.000", image: "https://images.unsplash.com/photo-1571764304303-978699b70f5a?w=400&h=500&fit=crop&crop=face" },
-  { name: "Renata Silva", category: "Córdoba, ARG", followers: "22k", rating: 5, badge: "oro" as const, price: "42.000", image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=500&fit=crop&crop=face" },
-]
-
-const col5 = [
-  { name: "Fernanda Cruz", category: "Buenos Aires, ARG", followers: "13k", rating: 4, badge: "plata" as const, price: "29.000", image: "https://images.unsplash.com/photo-1606525380696-c2bfe72f7b8d?w=400&h=500&fit=crop&crop=face" },
-  { name: "Javier Romero", category: "Tucumán, ARG", followers: "2.5k", rating: 3, badge: "bronce" as const, price: "15.200", image: "https://images.unsplash.com/photo-1742569184536-77ff9ae46c99?w=400&h=500&fit=crop&crop=face" },
-  { name: "Paula Vargas", category: "Caracas, VE", followers: "25k", rating: 5, badge: "oro" as const, price: "55.000", image: "https://images.unsplash.com/photo-1760200793219-041974d3543f?w=400&h=500&fit=crop&crop=face" },
-  { name: "Julian Reyes", category: "La Plata, ARG", followers: "8.3k", rating: 4, badge: "plata" as const, price: "23.500", image: "https://images.unsplash.com/photo-1642753514608-2c5755c02a35?w=400&h=500&fit=crop&crop=face" },
-  { name: "Camila Navarro", category: "Santiago, CL", followers: "17k", rating: 5, badge: "oro" as const, price: "37.000", image: "https://images.unsplash.com/photo-1740541605698-dceefcda82a0?w=400&h=500&fit=crop&crop=face" },
-  { name: "Santiago Mejia", category: "Buenos Aires, ARG", followers: "5.6k", rating: 3, badge: "bronce" as const, price: "18.000", image: "https://images.unsplash.com/photo-1620421595492-c9974ff8e2c2?w=400&h=500&fit=crop&crop=face" },
-]
-
-const columns = [
-  { data: col1, reverse: false },
-  { data: col2, reverse: true },
-  { data: col3, reverse: false },
-  { data: col4, reverse: true },
-  { data: col5, reverse: false },
-]
 
 function resolveLandingHref(href: string) {
   if (href.startsWith("#") || href.startsWith("http")) {
@@ -103,7 +51,7 @@ function LandingHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-white/60 backdrop-blur-lg" style={{ boxShadow: "0 2px 20px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04)" }}>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/60 backdrop-blur-lg" style={{ boxShadow: "0 2px 20px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04)" }}>
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-8 lg:px-16 py-[22px] relative">
         <Logo
           href="/"
@@ -266,44 +214,45 @@ export default function HomePage() {
   const { hero } = dictionary.home
 
   return (
-    <div className="min-h-screen bg-white" style={{ fontFamily: "'Poppins', sans-serif" }}>
+    <div className="min-h-screen bg-white overflow-x-clip" style={{ fontFamily: "'Poppins', sans-serif" }}>
       {/* Navigation */}
       <LandingHeader />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden" style={{ marginTop: "-72px", paddingTop: "72px" }}>
+      <section className="relative overflow-hidden min-h-[80vh] lg:min-h-0" style={{ paddingTop: "72px" }}>
         {/* Subtle dot texture */}
         <div className="absolute inset-0 pointer-events-none z-0" style={{ backgroundImage: "radial-gradient(circle, rgba(0, 25, 218, 0.07) 1.2px, transparent 1.2px)", backgroundSize: "16px 16px" }} />
-        {/* Desktop - Right Vertical Marquee Columns */}
-        <div className="hidden lg:flex gap-5 absolute top-0 bottom-0" style={{ left: "48%", right: 0 }}>
+
+        {/* Desktop - Right Vertical Marquee Columns with Phone Mockups */}
+        <div className="hidden lg:flex gap-5 absolute top-0 bottom-0 items-start" style={{ left: "50%", right: "-3%" }}>
           <div className="absolute inset-0 -z-1 rounded-l-[3rem]" style={{ background: "linear-gradient(135deg, rgba(0, 25, 218, 0.18) 0%, rgba(152, 16, 250, 0.14) 50%, rgba(230, 0, 118, 0.10) 100%)" }} />
           <div className="absolute left-0 right-0 h-28 pointer-events-none z-10" style={{ top: "72px", background: "linear-gradient(to bottom, rgba(255,255,255,0.25) 0%, transparent 100%)" }} />
           <div className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none z-10" style={{ background: "linear-gradient(to top, rgba(255,255,255,0.25) 0%, transparent 100%)" }} />
 
-          {columns.map((col, i) => (
-            <div key={i} className="flex-1 h-full">
+          {videoColumns.map((col, i) => (
+            <div key={i} className="h-full">
               <VerticalMarquee reverse={col.reverse} duration={55 + i * 5}>
-                {col.data.map((creator) => (
-                  <CreatorCard key={creator.name} {...creator} />
+                {col.data.map((entry, j) => (
+                  <PhoneMockup key={`${entry.src}-${j}`} videoSrc={entry.src} creator={entry.creator} />
                 ))}
               </VerticalMarquee>
             </div>
           ))}
         </div>
 
-        {/* Mobile - Single horizontal marquee row */}
+        {/* Mobile - Single horizontal marquee row with Phone Mockups */}
         <div className="lg:hidden relative overflow-hidden pt-6 md:pt-8 pb-2">
           <div className="overflow-hidden">
             <div
               className="flex gap-4"
               style={{
-                animation: "marquee-horizontal 35s linear infinite",
+                animation: "marquee-horizontal 60s linear infinite",
                 width: "max-content",
               }}
             >
-              {[...col1, ...col1].map((creator, j) => (
-                <div key={`${creator.name}-${j}`} className="flex-shrink-0 w-[160px] sm:w-[180px] md:w-[200px]">
-                  <CreatorCard {...creator} />
+              {[...allEntries, ...allEntries].map((entry, j) => (
+                <div key={`mobile-${j}`} className="flex-shrink-0">
+                  <MobileVideoCard videoSrc={entry.src} creator={entry.creator} />
                 </div>
               ))}
             </div>
@@ -315,8 +264,8 @@ export default function HomePage() {
         </div>
 
         {/* Hero text content */}
-        <div className="min-h-[calc(50vh-12px)] md:min-h-[calc(70vh-12px)] lg:min-h-[calc(90vh-12px)] max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 relative z-20 flex items-center">
-          <div className="w-full lg:w-[42%] pb-12 sm:pb-20 lg:py-0 text-left flex flex-col items-start">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 relative z-20 flex items-center min-h-0 pt-4 sm:pt-6 lg:pt-0 lg:min-h-[calc(90vh-12px)]">
+          <div className="w-full lg:w-[42%] pb-8 sm:pb-20 lg:py-0 text-left flex flex-col items-start">
             <div
               className="inline-flex items-center gap-2 sm:gap-3 px-3 py-1 sm:px-5 sm:py-1.5 rounded-full mb-5 backdrop-blur-lg"
               style={{ backgroundColor: "rgba(255, 255, 255, 0.6)", border: "1px solid rgba(0, 25, 218, 0.25)", boxShadow: "0 2px 20px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04)" }}

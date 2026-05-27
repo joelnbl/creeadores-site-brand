@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, Rocket, TrendingUp, Building2, Users, Megaphone, Percent, ArrowRight, Phone, BadgeDollarSign, Sparkles, type LucideIcon } from "lucide-react"
+import { Check, Rocket, TrendingUp, Building2, Users, Megaphone, Percent, Repeat, ArrowRight, Phone, BadgeDollarSign, Sparkles, type LucideIcon } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { analytics } from "@/lib/analytics"
 import { appLink } from "@/lib/links"
@@ -17,6 +17,7 @@ const planIconMap: Record<string, LucideIcon> = {
 const featureIconMap: Record<string, LucideIcon> = {
   users: Users,
   megaphone: Megaphone,
+  repeat: Repeat,
   percent: Percent,
 }
 
