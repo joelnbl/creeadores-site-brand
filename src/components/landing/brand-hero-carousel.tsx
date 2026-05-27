@@ -95,15 +95,15 @@ export function MobileVideoCard({ videoSrc, creator }: { videoSrc: string; creat
         />
 
         {creator && (
-          <div className="absolute left-2.5 top-2.5 z-10">
-            <span className="rounded-full border border-[#22C55E]/30 bg-[#16A34A]/40 px-1 py-px text-[6.5px] font-semibold text-white shadow-lg backdrop-blur-md" style={{ fontFamily: "Poppins, sans-serif" }}>
+          <div className="absolute left-2.5 top-2.5 z-10" style={{ transform: "translateZ(0)", backfaceVisibility: "hidden" }}>
+            <span className="rounded-full border border-[#22C55E]/30 bg-[#16A34A]/40 px-1 py-px text-[6.5px] font-semibold text-white shadow-lg" style={{ fontFamily: "Poppins, sans-serif" }}>
               + {creator.rate}
             </span>
           </div>
         )}
 
         {creator && (
-          <div className="absolute inset-x-0 bottom-0 z-10 px-2.5 pb-2.5 pt-10" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.50) 55%, transparent 100%)" }}>
+          <div className="absolute inset-x-0 bottom-0 z-10 px-2.5 pb-2.5 pt-10" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.50) 55%, transparent 100%)", transform: "translateZ(0)", backfaceVisibility: "hidden" }}>
             <div className="flex items-center gap-1.5">
               <div className="h-5 w-5 flex-shrink-0 overflow-hidden rounded-full" style={{ border: "1.5px solid rgba(255,255,255,0.4)" }}>
                 <div className="relative h-full w-full">
@@ -133,7 +133,7 @@ export function MobileVideoCard({ videoSrc, creator }: { videoSrc: string; creat
                 {creator.rating.toFixed(1)}
               </span>
               {creator.categories > 0 && (
-                <span className="rounded-full bg-white/15 px-1 py-px text-[5.5px] text-white/80 backdrop-blur-sm">
+                <span className="rounded-full bg-white/15 px-1 py-px text-[5.5px] text-white/80">
                   +{creator.categories} {creator.categories === 1 ? "Categoría" : "Categorías"}
                 </span>
               )}

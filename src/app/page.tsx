@@ -248,6 +248,9 @@ export default function HomePage() {
               style={{
                 animation: "marquee-horizontal 40s linear infinite",
                 width: "max-content",
+                willChange: "transform",
+                backfaceVisibility: "hidden",
+                WebkitBackfaceVisibility: "hidden",
               }}
             >
               {[...mobileEntries, ...mobileEntries].map((entry, j) => (
