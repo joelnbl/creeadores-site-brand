@@ -1,5 +1,6 @@
 "use client"
 
+import { useRef, useEffect } from "react"
 import { MapPin, Users, Star } from "lucide-react"
 
 interface CreatorInfo {
@@ -46,7 +47,26 @@ export const videoColumns = [
 
 export const allEntries = ENTRIES
 
+/** Lighter subset for mobile — skips the 4 heaviest videos (11-14 MB each) */
+export const mobileEntries = [
+  ENTRIES[0],  // baly-gym-bro (4 MB)
+  ENTRIES[1],  // lamode-ugc-cafe (2.3 MB)
+  ENTRIES[10], // creeadores-final (3.2 MB)
+  ENTRIES[8],  // ugc-mochila-cambia-todo (5.5 MB)
+  ENTRIES[7],  // ugc-3-cosas-viaje (6.6 MB)
+  ENTRIES[6],  // marroquineria-ugc-wonderlust (7.1 MB)
+  ENTRIES[5],  // marroquineria-ugc-mochila (7.7 MB)
+]
+
 export function MobileVideoCard({ videoSrc, creator }: { videoSrc: string; creator?: CreatorInfo }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    video.play().catch(() => {})
+  }, [])
+
   return (
     <div
       className="relative overflow-hidden"
@@ -61,14 +81,16 @@ export function MobileVideoCard({ videoSrc, creator }: { videoSrc: string; creat
     >
       <div
         className="absolute inset-[3px] overflow-hidden"
-        style={{ borderRadius: "clamp(15px, 2.7vw, 28px)" }}
+        style={{ borderRadius: "clamp(15px, 2.7vw, 28px)", background: "linear-gradient(to bottom, #1a1a2e, #16213e)" }}
       >
         <video
+          ref={videoRef}
           src={videoSrc}
           autoPlay
           loop
           muted
           playsInline
+          preload="metadata"
           className="w-full h-full object-cover"
         />
 
@@ -124,6 +146,14 @@ export function MobileVideoCard({ videoSrc, creator }: { videoSrc: string; creat
 }
 
 export function PhoneMockup({ videoSrc, creator }: { videoSrc: string; creator?: CreatorInfo }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    video.play().catch(() => {})
+  }, [])
+
   return (
     <div
       className="relative overflow-hidden"
@@ -148,14 +178,16 @@ export function PhoneMockup({ videoSrc, creator }: { videoSrc: string; creator?:
 
       <div
         className="absolute inset-[3px] overflow-hidden"
-        style={{ borderRadius: "clamp(15px, 2.7vw, 28px)" }}
+        style={{ borderRadius: "clamp(15px, 2.7vw, 28px)", background: "linear-gradient(to bottom, #1a1a2e, #16213e)" }}
       >
         <video
+          ref={videoRef}
           src={videoSrc}
           autoPlay
           loop
           muted
           playsInline
+          preload="metadata"
           className="w-full h-full object-cover"
         />
 

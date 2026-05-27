@@ -7,7 +7,7 @@ import { LanguageMenu } from "@/components/language-menu"
 import { useLanguage } from "@/components/language-provider"
 import { analytics } from "@/lib/analytics"
 import { appLink } from "@/lib/links"
-import { PhoneMockup, MobileVideoCard, videoColumns, allEntries } from "@/components/landing/brand-hero-carousel"
+import { PhoneMockup, MobileVideoCard, videoColumns, mobileEntries } from "@/components/landing/brand-hero-carousel"
 import { VerticalMarquee } from "@/components/landing/vertical-marquee"
 import { CampaignTypes } from "@/components/landing/campaign-types"
 import { CampaignFeatures } from "@/components/landing/campaign-features"
@@ -246,11 +246,11 @@ export default function HomePage() {
             <div
               className="flex gap-4"
               style={{
-                animation: "marquee-horizontal 60s linear infinite",
+                animation: "marquee-horizontal 40s linear infinite",
                 width: "max-content",
               }}
             >
-              {[...allEntries, ...allEntries].map((entry, j) => (
+              {[...mobileEntries, ...mobileEntries].map((entry, j) => (
                 <div key={`mobile-${j}`} className="flex-shrink-0">
                   <MobileVideoCard videoSrc={entry.src} creator={entry.creator} />
                 </div>
